@@ -7,29 +7,35 @@
     <title>Crypto Signal Station</title>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <style>
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 20px; background-color: #f4f4f9; color: #333; }
-        .container { max-width: 1000px; margin: 0 auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        h1 { color: #2c3e50; border-bottom: 2px solid #eee; padding-bottom: 10px; }
-        h2 { color: #34495e; margin-top: 30px; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 10px; background-color: #f4f4f9; color: #333; }
+        .container { max-width: 100%; margin: 0 auto; background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        @media (min-width: 768px) {
+            .container { max-width: 1000px; padding: 30px; }
+            body { padding: 20px; }
+        }
+        h1 { color: #2c3e50; border-bottom: 2px solid #eee; padding-bottom: 10px; font-size: 1.5em; }
+        h2 { color: #34495e; margin-top: 30px; font-size: 1.3em; }
         h3 { color: #7f8c8d; margin-top: 20px; border-bottom: 1px solid #eee; padding-bottom: 5px; }
-        .report-link { display: block; padding: 10px; margin: 5px 0; background: #f8f9fa; text-decoration: none; color: #2c3e50; border-radius: 4px; transition: background 0.2s; }
-        .report-link:hover { background: #e9ecef; }
-        .signal-row { padding: 10px; border-bottom: 1px solid #f1f1f1; display: flex; flex-direction: column; }
+        .report-link { display: block; padding: 15px; margin: 10px 0; background: #f8f9fa; text-decoration: none; color: #2c3e50; border-radius: 4px; transition: background 0.2s; border: 1px solid #eee; }
+        .report-link:hover { background: #e9ecef; border-color: #ddd; }
+        .signal-row { padding: 15px 0; border-bottom: 1px solid #f1f1f1; display: flex; flex-direction: column; }
         .signal-row:last-child { border-bottom: none; }
         .signal-info { margin-bottom: 10px; }
-        .signal-chart { width: 100%; height: 500px; border: 1px solid #ddd; border-radius: 4px; }
-        .tag { display: inline-block; padding: 2px 6px; border-radius: 4px; font-size: 0.85em; font-weight: bold; margin-right: 5px; }
+        .signal-chart-container { width: 100%; overflow-x: hidden; }
+        .tag { display: inline-block; padding: 4px 8px; border-radius: 4px; font-size: 0.85em; font-weight: bold; margin-right: 5px; margin-bottom: 5px; }
         .tag-buy { background-color: #d4edda; color: #155724; }
         .tag-sell { background-color: #f8d7da; color: #721c24; }
         .back-link { display: inline-block; margin-bottom: 20px; color: #666; text-decoration: none; }
         .back-link:hover { text-decoration: underline; }
-        .meta { color: #999; font-size: 0.9em; }
-        .history-link { font-size: 0.9em; margin-left: 10px; color: #007bff; text-decoration: none; }
+        .meta { color: #999; font-size: 0.9em; display: block; margin-top: 5px; }
+        .history-link { font-size: 0.9em; margin-left: 10px; color: #007bff; text-decoration: none; white-space: nowrap; }
         .history-link:hover { text-decoration: underline; }
-        .nav-bar { margin-bottom: 20px; padding-bottom: 10px; border-bottom: 1px solid #eee; }
-        .nav-link { margin-right: 15px; text-decoration: none; color: #2c3e50; font-weight: bold; }
+        .nav-bar { margin-bottom: 20px; padding-bottom: 10px; border-bottom: 1px solid #eee; display: flex; gap: 20px; }
+        .nav-link { text-decoration: none; color: #2c3e50; font-weight: bold; font-size: 1.1em; padding: 5px 0; }
         .nav-link:hover { color: #007bff; }
-        .nav-link.active { color: #007bff; }
+        .nav-link.active { color: #007bff; border-bottom: 2px solid #007bff; }
+        ul { padding-left: 20px; }
+        li { margin-bottom: 5px; }
     </style>
 </head>
 <body>
@@ -41,292 +47,9 @@
 
 <h1>Asset History Index</h1>
 <h2>Crypto</h2>
-<ul>
-<li><a href="history/crypto/ADA-USD.html">ADA-USD</a></li>
-<li><a href="history/crypto/BTC-USD.html">BTC-USD</a></li>
-<li><a href="history/crypto/DOGE-USD.html">DOGE-USD</a></li>
-<li><a href="history/crypto/ETH-USD.html">ETH-USD</a></li>
-<li><a href="history/crypto/HBAR-USD.html">HBAR-USD</a></li>
-<li><a href="history/crypto/LTC-USD.html">LTC-USD</a></li>
-<li><a href="history/crypto/SOL-USD.html">SOL-USD</a></li>
-<li><a href="history/crypto/XLM-USD.html">XLM-USD</a></li>
-<li><a href="history/crypto/XRP-USD.html">XRP-USD</a></li>
-</ul>
+<p>No history directory found.</p>
 <h2>Stocks</h2>
-<ul>
-<li><a href="history/stocks/AAL.html">AAL</a></li>
-<li><a href="history/stocks/AAPL.html">AAPL</a></li>
-<li><a href="history/stocks/ABBV.html">ABBV</a></li>
-<li><a href="history/stocks/ABT.html">ABT</a></li>
-<li><a href="history/stocks/ACN.html">ACN</a></li>
-<li><a href="history/stocks/ADBE.html">ADBE</a></li>
-<li><a href="history/stocks/ADI.html">ADI</a></li>
-<li><a href="history/stocks/ADP.html">ADP</a></li>
-<li><a href="history/stocks/ADSK.html">ADSK</a></li>
-<li><a href="history/stocks/AEE.html">AEE</a></li>
-<li><a href="history/stocks/AEP.html">AEP</a></li>
-<li><a href="history/stocks/AES.html">AES</a></li>
-<li><a href="history/stocks/AFL.html">AFL</a></li>
-<li><a href="history/stocks/AIG.html">AIG</a></li>
-<li><a href="history/stocks/ALK.html">ALK</a></li>
-<li><a href="history/stocks/ALL.html">ALL</a></li>
-<li><a href="history/stocks/AMAT.html">AMAT</a></li>
-<li><a href="history/stocks/AMD.html">AMD</a></li>
-<li><a href="history/stocks/AMGN.html">AMGN</a></li>
-<li><a href="history/stocks/AMT.html">AMT</a></li>
-<li><a href="history/stocks/AMZN.html">AMZN</a></li>
-<li><a href="history/stocks/ANET.html">ANET</a></li>
-<li><a href="history/stocks/AON.html">AON</a></li>
-<li><a href="history/stocks/APD.html">APD</a></li>
-<li><a href="history/stocks/ARE.html">ARE</a></li>
-<li><a href="history/stocks/ATO.html">ATO</a></li>
-<li><a href="history/stocks/AVB.html">AVB</a></li>
-<li><a href="history/stocks/AVGO.html">AVGO</a></li>
-<li><a href="history/stocks/AWK.html">AWK</a></li>
-<li><a href="history/stocks/AXP.html">AXP</a></li>
-<li><a href="history/stocks/AZO.html">AZO</a></li>
-<li><a href="history/stocks/BAC.html">BAC</a></li>
-<li><a href="history/stocks/BDX.html">BDX</a></li>
-<li><a href="history/stocks/BEN.html">BEN</a></li>
-<li><a href="history/stocks/BF-B.html">BF-B</a></li>
-<li><a href="history/stocks/BK.html">BK</a></li>
-<li><a href="history/stocks/BKNG.html">BKNG</a></li>
-<li><a href="history/stocks/BLK.html">BLK</a></li>
-<li><a href="history/stocks/BMY.html">BMY</a></li>
-<li><a href="history/stocks/BRK-B.html">BRK-B</a></li>
-<li><a href="history/stocks/BTI.html">BTI</a></li>
-<li><a href="history/stocks/BUD.html">BUD</a></li>
-<li><a href="history/stocks/BXP.html">BXP</a></li>
-<li><a href="history/stocks/C.html">C</a></li>
-<li><a href="history/stocks/CAG.html">CAG</a></li>
-<li><a href="history/stocks/CAT.html">CAT</a></li>
-<li><a href="history/stocks/CB.html">CB</a></li>
-<li><a href="history/stocks/CBRE.html">CBRE</a></li>
-<li><a href="history/stocks/CCI.html">CCI</a></li>
-<li><a href="history/stocks/CCL.html">CCL</a></li>
-<li><a href="history/stocks/CDNS.html">CDNS</a></li>
-<li><a href="history/stocks/CFG.html">CFG</a></li>
-<li><a href="history/stocks/CHD.html">CHD</a></li>
-<li><a href="history/stocks/CHRW.html">CHRW</a></li>
-<li><a href="history/stocks/CI.html">CI</a></li>
-<li><a href="history/stocks/CINF.html">CINF</a></li>
-<li><a href="history/stocks/CL.html">CL</a></li>
-<li><a href="history/stocks/CLX.html">CLX</a></li>
-<li><a href="history/stocks/CMA.html">CMA</a></li>
-<li><a href="history/stocks/CME.html">CME</a></li>
-<li><a href="history/stocks/CMG.html">CMG</a></li>
-<li><a href="history/stocks/CMS.html">CMS</a></li>
-<li><a href="history/stocks/CNA.html">CNA</a></li>
-<li><a href="history/stocks/COF.html">COF</a></li>
-<li><a href="history/stocks/COKE.html">COKE</a></li>
-<li><a href="history/stocks/COP.html">COP</a></li>
-<li><a href="history/stocks/COST.html">COST</a></li>
-<li><a href="history/stocks/CPB.html">CPB</a></li>
-<li><a href="history/stocks/CPT.html">CPT</a></li>
-<li><a href="history/stocks/CRM.html">CRM</a></li>
-<li><a href="history/stocks/CSCO.html">CSCO</a></li>
-<li><a href="history/stocks/CSX.html">CSX</a></li>
-<li><a href="history/stocks/CTAS.html">CTAS</a></li>
-<li><a href="history/stocks/CVS.html">CVS</a></li>
-<li><a href="history/stocks/CVX.html">CVX</a></li>
-<li><a href="history/stocks/D.html">D</a></li>
-<li><a href="history/stocks/DAL.html">DAL</a></li>
-<li><a href="history/stocks/DE.html">DE</a></li>
-<li><a href="history/stocks/DELL.html">DELL</a></li>
-<li><a href="history/stocks/DG.html">DG</a></li>
-<li><a href="history/stocks/DHR.html">DHR</a></li>
-<li><a href="history/stocks/DIS.html">DIS</a></li>
-<li><a href="history/stocks/DLR.html">DLR</a></li>
-<li><a href="history/stocks/DLTR.html">DLTR</a></li>
-<li><a href="history/stocks/DUK.html">DUK</a></li>
-<li><a href="history/stocks/DVN.html">DVN</a></li>
-<li><a href="history/stocks/DXC.html">DXC</a></li>
-<li><a href="history/stocks/ED.html">ED</a></li>
-<li><a href="history/stocks/EIX.html">EIX</a></li>
-<li><a href="history/stocks/EL.html">EL</a></li>
-<li><a href="history/stocks/ELV.html">ELV</a></li>
-<li><a href="history/stocks/EOG.html">EOG</a></li>
-<li><a href="history/stocks/EQIX.html">EQIX</a></li>
-<li><a href="history/stocks/EQR.html">EQR</a></li>
-<li><a href="history/stocks/ES.html">ES</a></li>
-<li><a href="history/stocks/ESS.html">ESS</a></li>
-<li><a href="history/stocks/ETN.html">ETN</a></li>
-<li><a href="history/stocks/EXC.html">EXC</a></li>
-<li><a href="history/stocks/EXPD.html">EXPD</a></li>
-<li><a href="history/stocks/FANG.html">FANG</a></li>
-<li><a href="history/stocks/FCX.html">FCX</a></li>
-<li><a href="history/stocks/FDX.html">FDX</a></li>
-<li><a href="history/stocks/FIS.html">FIS</a></li>
-<li><a href="history/stocks/FISV.html">FISV</a></li>
-<li><a href="history/stocks/FITB.html">FITB</a></li>
-<li><a href="history/stocks/GD.html">GD</a></li>
-<li><a href="history/stocks/GE.html">GE</a></li>
-<li><a href="history/stocks/GILD.html">GILD</a></li>
-<li><a href="history/stocks/GIS.html">GIS</a></li>
-<li><a href="history/stocks/GM.html">GM</a></li>
-<li><a href="history/stocks/GOOG.html">GOOG</a></li>
-<li><a href="history/stocks/GOOGL.html">GOOGL</a></li>
-<li><a href="history/stocks/GPN.html">GPN</a></li>
-<li><a href="history/stocks/GS.html">GS</a></li>
-<li><a href="history/stocks/HAL.html">HAL</a></li>
-<li><a href="history/stocks/HBAN.html">HBAN</a></li>
-<li><a href="history/stocks/HCA.html">HCA</a></li>
-<li><a href="history/stocks/HD.html">HD</a></li>
-<li><a href="history/stocks/HIG.html">HIG</a></li>
-<li><a href="history/stocks/HLT.html">HLT</a></li>
-<li><a href="history/stocks/HON.html">HON</a></li>
-<li><a href="history/stocks/HPE.html">HPE</a></li>
-<li><a href="history/stocks/HPQ.html">HPQ</a></li>
-<li><a href="history/stocks/HRL.html">HRL</a></li>
-<li><a href="history/stocks/HST.html">HST</a></li>
-<li><a href="history/stocks/HSY.html">HSY</a></li>
-<li><a href="history/stocks/HUM.html">HUM</a></li>
-<li><a href="history/stocks/IBM.html">IBM</a></li>
-<li><a href="history/stocks/ICE.html">ICE</a></li>
-<li><a href="history/stocks/INTC.html">INTC</a></li>
-<li><a href="history/stocks/INTU.html">INTU</a></li>
-<li><a href="history/stocks/IPG.html">IPG</a></li>
-<li><a href="history/stocks/ISRG.html">ISRG</a></li>
-<li><a href="history/stocks/ITW.html">ITW</a></li>
-<li><a href="history/stocks/IVZ.html">IVZ</a></li>
-<li><a href="history/stocks/JBHT.html">JBHT</a></li>
-<li><a href="history/stocks/JNJ.html">JNJ</a></li>
-<li><a href="history/stocks/JPM.html">JPM</a></li>
-<li><a href="history/stocks/KDP.html">KDP</a></li>
-<li><a href="history/stocks/KEY.html">KEY</a></li>
-<li><a href="history/stocks/KMB.html">KMB</a></li>
-<li><a href="history/stocks/KMI.html">KMI</a></li>
-<li><a href="history/stocks/KO.html">KO</a></li>
-<li><a href="history/stocks/KR.html">KR</a></li>
-<li><a href="history/stocks/L.html">L</a></li>
-<li><a href="history/stocks/LB.html">LB</a></li>
-<li><a href="history/stocks/LDOS.html">LDOS</a></li>
-<li><a href="history/stocks/LIN.html">LIN</a></li>
-<li><a href="history/stocks/LMT.html">LMT</a></li>
-<li><a href="history/stocks/LNT.html">LNT</a></li>
-<li><a href="history/stocks/LOW.html">LOW</a></li>
-<li><a href="history/stocks/LRCX.html">LRCX</a></li>
-<li><a href="history/stocks/LUV.html">LUV</a></li>
-<li><a href="history/stocks/LVS.html">LVS</a></li>
-<li><a href="history/stocks/MA.html">MA</a></li>
-<li><a href="history/stocks/MAA.html">MAA</a></li>
-<li><a href="history/stocks/MAR.html">MAR</a></li>
-<li><a href="history/stocks/MCD.html">MCD</a></li>
-<li><a href="history/stocks/MCK.html">MCK</a></li>
-<li><a href="history/stocks/MCO.html">MCO</a></li>
-<li><a href="history/stocks/MDLZ.html">MDLZ</a></li>
-<li><a href="history/stocks/MDT.html">MDT</a></li>
-<li><a href="history/stocks/MET.html">MET</a></li>
-<li><a href="history/stocks/META.html">META</a></li>
-<li><a href="history/stocks/MGM.html">MGM</a></li>
-<li><a href="history/stocks/MKC.html">MKC</a></li>
-<li><a href="history/stocks/MMC.html">MMC</a></li>
-<li><a href="history/stocks/MNST.html">MNST</a></li>
-<li><a href="history/stocks/MO.html">MO</a></li>
-<li><a href="history/stocks/MPC.html">MPC</a></li>
-<li><a href="history/stocks/MRK.html">MRK</a></li>
-<li><a href="history/stocks/MS.html">MS</a></li>
-<li><a href="history/stocks/MSFT.html">MSFT</a></li>
-<li><a href="history/stocks/MSI.html">MSI</a></li>
-<li><a href="history/stocks/MTB.html">MTB</a></li>
-<li><a href="history/stocks/MU.html">MU</a></li>
-<li><a href="history/stocks/NCLH.html">NCLH</a></li>
-<li><a href="history/stocks/NDAQ.html">NDAQ</a></li>
-<li><a href="history/stocks/NEE.html">NEE</a></li>
-<li><a href="history/stocks/NFLX.html">NFLX</a></li>
-<li><a href="history/stocks/NKE.html">NKE</a></li>
-<li><a href="history/stocks/NOC.html">NOC</a></li>
-<li><a href="history/stocks/NOW.html">NOW</a></li>
-<li><a href="history/stocks/NSC.html">NSC</a></li>
-<li><a href="history/stocks/NTAP.html">NTAP</a></li>
-<li><a href="history/stocks/NTRS.html">NTRS</a></li>
-<li><a href="history/stocks/NVDA.html">NVDA</a></li>
-<li><a href="history/stocks/O.html">O</a></li>
-<li><a href="history/stocks/OKE.html">OKE</a></li>
-<li><a href="history/stocks/OMC.html">OMC</a></li>
-<li><a href="history/stocks/ORCL.html">ORCL</a></li>
-<li><a href="history/stocks/ORLY.html">ORLY</a></li>
-<li><a href="history/stocks/PAYC.html">PAYC</a></li>
-<li><a href="history/stocks/PBI.html">PBI</a></li>
-<li><a href="history/stocks/PEG.html">PEG</a></li>
-<li><a href="history/stocks/PEP.html">PEP</a></li>
-<li><a href="history/stocks/PFE.html">PFE</a></li>
-<li><a href="history/stocks/PFGC.html">PFGC</a></li>
-<li><a href="history/stocks/PG.html">PG</a></li>
-<li><a href="history/stocks/PGR.html">PGR</a></li>
-<li><a href="history/stocks/PLD.html">PLD</a></li>
-<li><a href="history/stocks/PM.html">PM</a></li>
-<li><a href="history/stocks/PNC.html">PNC</a></li>
-<li><a href="history/stocks/PPL.html">PPL</a></li>
-<li><a href="history/stocks/PRU.html">PRU</a></li>
-<li><a href="history/stocks/PSA.html">PSA</a></li>
-<li><a href="history/stocks/PSX.html">PSX</a></li>
-<li><a href="history/stocks/PVH.html">PVH</a></li>
-<li><a href="history/stocks/PYPL.html">PYPL</a></li>
-<li><a href="history/stocks/QCOM.html">QCOM</a></li>
-<li><a href="history/stocks/RCL.html">RCL</a></li>
-<li><a href="history/stocks/REGN.html">REGN</a></li>
-<li><a href="history/stocks/RF.html">RF</a></li>
-<li><a href="history/stocks/RL.html">RL</a></li>
-<li><a href="history/stocks/ROP.html">ROP</a></li>
-<li><a href="history/stocks/ROST.html">ROST</a></li>
-<li><a href="history/stocks/RTX.html">RTX</a></li>
-<li><a href="history/stocks/SCHW.html">SCHW</a></li>
-<li><a href="history/stocks/SHW.html">SHW</a></li>
-<li><a href="history/stocks/SLB.html">SLB</a></li>
-<li><a href="history/stocks/SNPS.html">SNPS</a></li>
-<li><a href="history/stocks/SO.html">SO</a></li>
-<li><a href="history/stocks/SPG.html">SPG</a></li>
-<li><a href="history/stocks/SPGI.html">SPGI</a></li>
-<li><a href="history/stocks/SRE.html">SRE</a></li>
-<li><a href="history/stocks/STT.html">STT</a></li>
-<li><a href="history/stocks/STX.html">STX</a></li>
-<li><a href="history/stocks/STZ.html">STZ</a></li>
-<li><a href="history/stocks/SYF.html">SYF</a></li>
-<li><a href="history/stocks/SYK.html">SYK</a></li>
-<li><a href="history/stocks/SYY.html">SYY</a></li>
-<li><a href="history/stocks/T.html">T</a></li>
-<li><a href="history/stocks/TAP.html">TAP</a></li>
-<li><a href="history/stocks/TGT.html">TGT</a></li>
-<li><a href="history/stocks/TJX.html">TJX</a></li>
-<li><a href="history/stocks/TMO.html">TMO</a></li>
-<li><a href="history/stocks/TPR.html">TPR</a></li>
-<li><a href="history/stocks/TROW.html">TROW</a></li>
-<li><a href="history/stocks/TRV.html">TRV</a></li>
-<li><a href="history/stocks/TSLA.html">TSLA</a></li>
-<li><a href="history/stocks/TSN.html">TSN</a></li>
-<li><a href="history/stocks/TXN.html">TXN</a></li>
-<li><a href="history/stocks/UAL.html">UAL</a></li>
-<li><a href="history/stocks/UDR.html">UDR</a></li>
-<li><a href="history/stocks/UNH.html">UNH</a></li>
-<li><a href="history/stocks/UNP.html">UNP</a></li>
-<li><a href="history/stocks/UPS.html">UPS</a></li>
-<li><a href="history/stocks/USB.html">USB</a></li>
-<li><a href="history/stocks/USFD.html">USFD</a></li>
-<li><a href="history/stocks/V.html">V</a></li>
-<li><a href="history/stocks/VFC.html">VFC</a></li>
-<li><a href="history/stocks/VICI.html">VICI</a></li>
-<li><a href="history/stocks/VLO.html">VLO</a></li>
-<li><a href="history/stocks/VRSN.html">VRSN</a></li>
-<li><a href="history/stocks/VRTX.html">VRTX</a></li>
-<li><a href="history/stocks/VTR.html">VTR</a></li>
-<li><a href="history/stocks/WDC.html">WDC</a></li>
-<li><a href="history/stocks/WEC.html">WEC</a></li>
-<li><a href="history/stocks/WELL.html">WELL</a></li>
-<li><a href="history/stocks/WFC.html">WFC</a></li>
-<li><a href="history/stocks/WM.html">WM</a></li>
-<li><a href="history/stocks/WMB.html">WMB</a></li>
-<li><a href="history/stocks/WMT.html">WMT</a></li>
-<li><a href="history/stocks/WPP.html">WPP</a></li>
-<li><a href="history/stocks/WRB.html">WRB</a></li>
-<li><a href="history/stocks/WU.html">WU</a></li>
-<li><a href="history/stocks/WY.html">WY</a></li>
-<li><a href="history/stocks/WYNN.html">WYNN</a></li>
-<li><a href="history/stocks/XEL.html">XEL</a></li>
-<li><a href="history/stocks/XOM.html">XOM</a></li>
-<li><a href="history/stocks/ZION.html">ZION</a></li>
-<li><a href="history/stocks/ZTS.html">ZTS</a></li>
-</ul>
+<p>No history directory found.</p>
 
     <div style="margin-top: 40px; text-align: center; color: #999; font-size: 0.8em;">
         Generated by Crypto Signal Station
