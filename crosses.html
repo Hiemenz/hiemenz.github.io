@@ -1,0 +1,2355 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto Signal Station</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 10px; background-color: #f4f4f9; color: #333; }
+        .container { max-width: 100%; margin: 0 auto; background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        @media (min-width: 768px) {
+            .container { max-width: 1000px; padding: 30px; }
+            body { padding: 20px; }
+        }
+        h1 { color: #2c3e50; border-bottom: 2px solid #eee; padding-bottom: 10px; font-size: 1.5em; }
+        h2 { color: #34495e; margin-top: 30px; font-size: 1.3em; }
+        h3 { color: #7f8c8d; margin-top: 20px; border-bottom: 1px solid #eee; padding-bottom: 5px; }
+        .report-link { display: block; padding: 15px; margin: 10px 0; background: #f8f9fa; text-decoration: none; color: #2c3e50; border-radius: 4px; transition: background 0.2s; border: 1px solid #eee; }
+        .report-link:hover { background: #e9ecef; border-color: #ddd; }
+        .signal-row { padding: 15px 0; border-bottom: 1px solid #f1f1f1; display: flex; flex-direction: column; }
+        .signal-row:last-child { border-bottom: none; }
+        .signal-info { margin-bottom: 10px; }
+        .signal-chart-container { width: 100%; overflow-x: hidden; }
+        .tag { display: inline-block; padding: 4px 8px; border-radius: 4px; font-size: 0.85em; font-weight: bold; margin-right: 5px; margin-bottom: 5px; }
+        .tag-buy { background-color: #d4edda; color: #155724; }
+        .tag-sell { background-color: #f8d7da; color: #721c24; }
+        .back-link { display: inline-block; margin-bottom: 20px; color: #666; text-decoration: none; }
+        .back-link:hover { text-decoration: underline; }
+        .meta { color: #999; font-size: 0.9em; display: block; margin-top: 5px; }
+        .history-link { font-size: 0.9em; margin-left: 10px; color: #007bff; text-decoration: none; white-space: nowrap; }
+        .history-link:hover { text-decoration: underline; }
+        .nav-bar { margin-bottom: 20px; padding-bottom: 10px; border-bottom: 1px solid #eee; display: flex; gap: 20px; }
+        .nav-link { text-decoration: none; color: #2c3e50; font-weight: bold; font-size: 1.1em; padding: 5px 0; }
+        .nav-link:hover { color: #007bff; }
+        .nav-link.active { color: #007bff; border-bottom: 2px solid #007bff; }
+        /* Grid for History Index */
+        .asset-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 10px; margin-top: 10px; }
+        .asset-link { display: block; padding: 10px; background: #fff; border: 1px solid #ddd; border-radius: 4px; text-align: center; text-decoration: none; color: #2c3e50; font-weight: bold; transition: all 0.2s; }
+        .asset-link:hover { background: #007bff; color: white; border-color: #007bff; transform: translateY(-2px); box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="nav-bar">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="history.html" class="nav-link">History</a>
+        <a href="analysis.html" class="nav-link">Analysis</a>
+        <a href="crosses.html" class="nav-link">Crosses</a>
+    </div>
+
+<h1>Golden & Death Cross Feed</h1>
+<p><i>Events from the last 365 days (Newest First)</i></p>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-11-21</strong> - <strong>BKNG</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/BKNG.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $4,768.00</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-11-19</strong> - <strong>NKE</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/NKE.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $62.64</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-11-19</strong> - <strong>CB</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/CB.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $293.96</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-11-19</strong> - <strong>VRSN</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/VRSN.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $245.76</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-11-19</strong> - <strong>VFC</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/VFC.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $14.67</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-11-18</strong> - <strong>FANG</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/FANG.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $149.58</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-11-17</strong> - <strong>MCD</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/MCD.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $304.90</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-11-17</strong> - <strong>VICI</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/VICI.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $30.13</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-11-16</strong> - <strong>BTC-USD</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/crypto/BTC-USD.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $94,177.08</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-11-14</strong> - <strong>PSA</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/PSA.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $274.26</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-11-14</strong> - <strong>ABT</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/ABT.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $130.59</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-11-13</strong> - <strong>REGN</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/REGN.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $694.99</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-11-12</strong> - <strong>LTC-USD</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/crypto/LTC-USD.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $97.54</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-11-12</strong> - <strong>T</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/T.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $25.65</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-11-10</strong> - <strong>DOGE-USD</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/crypto/DOGE-USD.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $0.18</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-11-10</strong> - <strong>XLM-USD</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/crypto/XLM-USD.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $0.30</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-11-10</strong> - <strong>LIN</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/LIN.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $420.67</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-11-10</strong> - <strong>MGM</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/MGM.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $32.85</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-11-08</strong> - <strong>XRP-USD</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/crypto/XRP-USD.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $2.28</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-11-07</strong> - <strong>INTU</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/INTU.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $648.85</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-11-07</strong> - <strong>COKE</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/COKE.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $137.78</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-11-06</strong> - <strong>AMGN</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/AMGN.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $315.59</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-11-05</strong> - <strong>JBHT</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/JBHT.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $169.81</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-11-04</strong> - <strong>ADA-USD</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/crypto/ADA-USD.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $0.52</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-11-04</strong> - <strong>CNA</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/CNA.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $43.91</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-11-04</strong> - <strong>AWK</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/AWK.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $127.26</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-11-03</strong> - <strong>SHW</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/SHW.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $344.83</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-11-02</strong> - <strong>HBAR-USD</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/crypto/HBAR-USD.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $0.19</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-10-31</strong> - <strong>PM</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/PM.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $144.33</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-10-31</strong> - <strong>KR</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/KR.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $63.29</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-10-30</strong> - <strong>AAL</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/AAL.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $12.78</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-10-29</strong> - <strong>SPGI</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/SPGI.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $473.05</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-10-29</strong> - <strong>SYK</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/SYK.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $369.59</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-10-29</strong> - <strong>BRK-B</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/BRK-B.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $475.76</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-10-29</strong> - <strong>AMGN</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/AMGN.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $291.77</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-10-29</strong> - <strong>SNPS</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/SNPS.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $455.34</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-10-29</strong> - <strong>TXN</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/TXN.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $158.84</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-10-28</strong> - <strong>COP</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/COP.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $85.99</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-10-28</strong> - <strong>DHR</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/DHR.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $216.90</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-10-28</strong> - <strong>V</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/V.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $346.21</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-10-27</strong> - <strong>FDX</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/FDX.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $247.34</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-10-23</strong> - <strong>HAL</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/HAL.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $27.22</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-10-22</strong> - <strong>PSA</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/PSA.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $310.88</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-10-22</strong> - <strong>CCI</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/CCI.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $97.70</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-10-22</strong> - <strong>AIG</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/AIG.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $78.94</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-10-21</strong> - <strong>ICE</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/ICE.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $156.79</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-10-21</strong> - <strong>MRK</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/MRK.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $87.62</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-10-21</strong> - <strong>BRK-B</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/BRK-B.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $491.29</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-10-17</strong> - <strong>HPQ</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/HPQ.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $27.37</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-10-14</strong> - <strong>CTAS</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/CTAS.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $187.78</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-10-14</strong> - <strong>OMC</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/OMC.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $78.55</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-10-13</strong> - <strong>DE</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/DE.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $439.11</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-10-13</strong> - <strong>EIX</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/EIX.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $53.65</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-10-10</strong> - <strong>AIG</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/AIG.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $81.30</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-10-09</strong> - <strong>KO</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/KO.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $66.37</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-10-09</strong> - <strong>ED</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/ED.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $99.97</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-10-08</strong> - <strong>LMT</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/LMT.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $514.02</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-10-07</strong> - <strong>BUD</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/BUD.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $59.68</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-10-06</strong> - <strong>WM</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/WM.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $217.69</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-10-03</strong> - <strong>MET</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/MET.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $81.78</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-10-02</strong> - <strong>HON</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/HON.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $197.69</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-10-02</strong> - <strong>PAYC</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/PAYC.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $201.38</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-10-01</strong> - <strong>APD</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/APD.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $268.70</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-10-01</strong> - <strong>AMT</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/AMT.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $193.32</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-09-30</strong> - <strong>MDLZ</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/MDLZ.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $62.47</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-09-30</strong> - <strong>TMO</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/TMO.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $485.02</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-09-30</strong> - <strong>AIG</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/AIG.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $78.54</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-09-26</strong> - <strong>PVH</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/PVH.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $86.78</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-09-22</strong> - <strong>ADP</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/ADP.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $293.66</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-09-19</strong> - <strong>AFL</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/AFL.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $107.48</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-09-19</strong> - <strong>IPG</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/IPG.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $25.65</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-09-19</strong> - <strong>CNA</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/CNA.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $45.06</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-09-16</strong> - <strong>TSLA</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/TSLA.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $421.62</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-09-15</strong> - <strong>COP</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/COP.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $91.48</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-09-15</strong> - <strong>AAPL</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/AAPL.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $236.47</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-09-11</strong> - <strong>APD</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/APD.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $292.59</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-09-11</strong> - <strong>KDP</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/KDP.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $27.34</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-09-10</strong> - <strong>PLD</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/PLD.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $110.00</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-09-10</strong> - <strong>ROST</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/ROST.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $149.24</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-09-08</strong> - <strong>BXP</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/BXP.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $75.09</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-09-08</strong> - <strong>HUM</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/HUM.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $309.30</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-09-08</strong> - <strong>PEP</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/PEP.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $141.71</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-09-08</strong> - <strong>LOW</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/LOW.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $271.68</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-09-05</strong> - <strong>DVN</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/DVN.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $34.52</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-09-05</strong> - <strong>MSI</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/MSI.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $477.90</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-09-05</strong> - <strong>SHW</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/SHW.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $371.56</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-09-02</strong> - <strong>HD</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/HD.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $404.02</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-08-29</strong> - <strong>DAL</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/DAL.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $61.59</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-08-28</strong> - <strong>SPG</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/SPG.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $177.25</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-08-28</strong> - <strong>NTAP</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/NTAP.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $116.71</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-08-27</strong> - <strong>SRE</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/SRE.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $81.67</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-08-26</strong> - <strong>MCD</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/MCD.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $311.17</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-08-25</strong> - <strong>NCLH</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/NCLH.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $24.64</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-08-25</strong> - <strong>FIS</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/FIS.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $70.67</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-08-22</strong> - <strong>UAL</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/UAL.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $102.98</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-08-22</strong> - <strong>TROW</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/TROW.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $106.99</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-08-20</strong> - <strong>COST</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/COST.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $993.16</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-08-15</strong> - <strong>QCOM</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/QCOM.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $156.96</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-08-15</strong> - <strong>PFE</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/PFE.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $24.70</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-08-15</strong> - <strong>INTC</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/INTC.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $24.56</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-08-14</strong> - <strong>MCD</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/MCD.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $307.21</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-08-13</strong> - <strong>ADA-USD</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/crypto/ADA-USD.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $0.91</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-08-13</strong> - <strong>ITW</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/ITW.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $265.67</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-08-13</strong> - <strong>HRL</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/HRL.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $28.61</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-08-13</strong> - <strong>NOW</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/NOW.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $863.30</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-08-13</strong> - <strong>ROP</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/ROP.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $521.66</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-08-13</strong> - <strong>HST</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/HST.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $15.92</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-08-12</strong> - <strong>DOGE-USD</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/crypto/DOGE-USD.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $0.24</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-08-12</strong> - <strong>NKE</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/NKE.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $74.51</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-08-11</strong> - <strong>XOM</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/XOM.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $103.95</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-08-11</strong> - <strong>CHRW</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/CHRW.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $115.68</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-08-11</strong> - <strong>CB</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/CB.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $271.00</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-08-11</strong> - <strong>CVX</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/CVX.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $150.08</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-08-08</strong> - <strong>AES</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/AES.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $12.96</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-08-08</strong> - <strong>FITB</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/FITB.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $41.27</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-08-08</strong> - <strong>USB</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/USB.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $44.38</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-08-06</strong> - <strong>LTC-USD</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/crypto/LTC-USD.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $119.30</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-08-06</strong> - <strong>HBAR-USD</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/crypto/HBAR-USD.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $0.24</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-08-06</strong> - <strong>PEG</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/PEG.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $85.20</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-08-06</strong> - <strong>ZION</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/ZION.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $50.65</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-08-06</strong> - <strong>EXPD</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/EXPD.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $118.73</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-08-05</strong> - <strong>SOL-USD</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/crypto/SOL-USD.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $164.10</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-08-05</strong> - <strong>PGR</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/PGR.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $242.84</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-08-05</strong> - <strong>TSLA</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/TSLA.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $308.72</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-08-04</strong> - <strong>CMA</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/CMA.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $66.71</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-08-04</strong> - <strong>BRK-B</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/BRK-B.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $459.11</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-08-01</strong> - <strong>CI</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/CI.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $260.91</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-07-31</strong> - <strong>HPE</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/HPE.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $20.58</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-07-30</strong> - <strong>LVS</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/LVS.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $52.50</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-07-30</strong> - <strong>LB</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/LB.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $57.70</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-07-29</strong> - <strong>IVZ</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/IVZ.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $21.32</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-07-28</strong> - <strong>ISRG</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/ISRG.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $493.95</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-07-28</strong> - <strong>HSY</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/HSY.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $181.76</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-07-28</strong> - <strong>AMGN</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/AMGN.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $298.87</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-07-25</strong> - <strong>XLM-USD</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/crypto/XLM-USD.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $0.43</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-07-25</strong> - <strong>PNC</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/PNC.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $194.27</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-07-25</strong> - <strong>MGM</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/MGM.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $38.44</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-07-24</strong> - <strong>GOOG</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/GOOG.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $193.03</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-07-23</strong> - <strong>RF</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/RF.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $26.11</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-07-23</strong> - <strong>GOOGL</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/GOOGL.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $190.06</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-07-22</strong> - <strong>XRP-USD</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/crypto/XRP-USD.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $3.55</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-07-22</strong> - <strong>ANET</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/ANET.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $109.78</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-07-21</strong> - <strong>NEE</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/NEE.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $75.59</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-07-18</strong> - <strong>CSX</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/CSX.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $34.25</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-07-18</strong> - <strong>GM</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/GM.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $53.08</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-07-18</strong> - <strong>MDT</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/MDT.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $88.94</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-07-17</strong> - <strong>KEY</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/KEY.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $18.18</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-07-17</strong> - <strong>PSX</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/PSX.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $122.91</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-07-17</strong> - <strong>MTB</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/MTB.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $194.15</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-07-16</strong> - <strong>EL</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/EL.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $86.07</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-07-16</strong> - <strong>AMD</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/AMD.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $160.08</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-07-16</strong> - <strong>CFG</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/CFG.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $46.15</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-07-16</strong> - <strong>CNA</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/CNA.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $42.91</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-07-15</strong> - <strong>CAT</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/CAT.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $402.01</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-07-15</strong> - <strong>NOC</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/NOC.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $514.80</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-07-14</strong> - <strong>AMAT</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/AMAT.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $196.54</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-07-14</strong> - <strong>SYY</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/SYY.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $77.20</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-07-11</strong> - <strong>FCX</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/FCX.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $46.04</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-07-11</strong> - <strong>CBRE</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/CBRE.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $140.50</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-07-11</strong> - <strong>MAR</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/MAR.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $280.93</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-07-10</strong> - <strong>SNPS</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/SNPS.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $566.19</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-07-09</strong> - <strong>MMC</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/MMC.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $212.30</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-07-09</strong> - <strong>DELL</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/DELL.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $125.67</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-07-09</strong> - <strong>JNJ</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/JNJ.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $155.14</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-07-08</strong> - <strong>AMZN</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/AMZN.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $219.36</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-07-08</strong> - <strong>NSC</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/NSC.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $258.69</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-07-08</strong> - <strong>MAA</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/MAA.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $147.07</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-07-08</strong> - <strong>HRL</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/HRL.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $30.43</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-07-08</strong> - <strong>TXN</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/TXN.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $213.17</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-07-07</strong> - <strong>VLO</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/VLO.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $142.57</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-07-07</strong> - <strong>LDOS</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/LDOS.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $164.10</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-07-03</strong> - <strong>ETN</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/ETN.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $361.17</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-07-03</strong> - <strong>SYF</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/SYF.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $69.57</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-07-03</strong> - <strong>BLK</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/BLK.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $1,077.07</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-07-02</strong> - <strong>MCO</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/MCO.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $496.22</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-07-02</strong> - <strong>HBAN</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/HBAN.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $17.25</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-07-02</strong> - <strong>FIS</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/FIS.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $80.80</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-07-02</strong> - <strong>CCL</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/CCL.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $29.65</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-07-01</strong> - <strong>ETH-USD</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/crypto/ETH-USD.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $2,405.79</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-07-01</strong> - <strong>LUV</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/LUV.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $33.22</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-07-01</strong> - <strong>WYNN</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/WYNN.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $101.52</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-07-01</strong> - <strong>ABBV</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/ABBV.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $187.01</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-07-01</strong> - <strong>TSLA</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/TSLA.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $300.71</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-07-01</strong> - <strong>ADI</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/ADI.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $239.69</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-07-01</strong> - <strong>KMB</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/KMB.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $130.33</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-06-30</strong> - <strong>SPGI</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/SPGI.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $526.37</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-06-30</strong> - <strong>ORCL</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/ORCL.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $217.79</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-06-27</strong> - <strong>NVDA</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/NVDA.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $157.74</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-06-27</strong> - <strong>MU</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/MU.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $124.56</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-06-27</strong> - <strong>HLT</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/HLT.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $265.36</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-06-27</strong> - <strong>BAC</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/BAC.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $46.86</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-06-26</strong> - <strong>D</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/D.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $54.55</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-06-25</strong> - <strong>AXP</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/AXP.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $307.03</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-06-25</strong> - <strong>NOW</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/NOW.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $1,005.16</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-06-24</strong> - <strong>ISRG</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/ISRG.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $523.08</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-06-24</strong> - <strong>WDC</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/WDC.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $62.00</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-06-23</strong> - <strong>DLR</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/DLR.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $176.09</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-06-23</strong> - <strong>ISRG</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/ISRG.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $515.09</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-06-23</strong> - <strong>ADSK</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/ADSK.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $300.95</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-06-20</strong> - <strong>ISRG</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/ISRG.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $509.36</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-06-20</strong> - <strong>GD</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/GD.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $276.14</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-06-20</strong> - <strong>DIS</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/DIS.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $117.13</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-06-20</strong> - <strong>MPC</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/MPC.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $167.34</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-06-20</strong> - <strong>STT</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/STT.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $98.19</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-06-18</strong> - <strong>HON</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/HON.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $206.79</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-06-18</strong> - <strong>NTRS</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/NTRS.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $110.29</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-06-17</strong> - <strong>O</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/O.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $56.21</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-06-16</strong> - <strong>META</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/META.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $701.65</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-06-16</strong> - <strong>LRCX</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/LRCX.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $92.99</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-06-13</strong> - <strong>STX</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/STX.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $126.20</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-06-12</strong> - <strong>MS</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/MS.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $130.22</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-06-11</strong> - <strong>PFGC</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/PFGC.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $86.70</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-06-10</strong> - <strong>GS</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/GS.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $611.60</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-06-10</strong> - <strong>BEN</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/BEN.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $21.27</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-06-10</strong> - <strong>TAP</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/TAP.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $51.72</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-06-09</strong> - <strong>MSFT</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/MSFT.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $471.97</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-06-09</strong> - <strong>VRTX</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/VRTX.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $446.15</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-06-06</strong> - <strong>SYK</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/SYK.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $382.20</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-06-06</strong> - <strong>ES</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/ES.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $64.75</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-06-05</strong> - <strong>LIN</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/LIN.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $468.76</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-06-05</strong> - <strong>ABBV</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/ABBV.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $184.53</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-06-05</strong> - <strong>AON</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/AON.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $369.71</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-06-03</strong> - <strong>SYK</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/SYK.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $379.33</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-06-02</strong> - <strong>JNJ</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/JNJ.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $154.27</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-05-30</strong> - <strong>AFL</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/AFL.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $102.44</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-05-30</strong> - <strong>CDNS</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/CDNS.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $287.07</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-05-29</strong> - <strong>NOC</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/NOC.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $475.24</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-05-28</strong> - <strong>HCA</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/HCA.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $377.03</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-05-28</strong> - <strong>INTU</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/INTU.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $752.06</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-05-27</strong> - <strong>NDAQ</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/NDAQ.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $82.57</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-05-23</strong> - <strong>TSN</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/TSN.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $54.56</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-05-22</strong> - <strong>BTC-USD</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/crypto/BTC-USD.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $111,673.28</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-05-22</strong> - <strong>FISV</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/FISV.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $161.34</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-05-22</strong> - <strong>COKE</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/COKE.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $112.55</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-05-21</strong> - <strong>MDT</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/MDT.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $83.08</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-05-19</strong> - <strong>BMY</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/BMY.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $45.97</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-05-18</strong> - <strong>XRP-USD</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/crypto/XRP-USD.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $2.43</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-05-15</strong> - <strong>LIN</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/LIN.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $451.34</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-05-15</strong> - <strong>DLTR</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/DLTR.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $86.58</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-05-15</strong> - <strong>AVGO</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/AVGO.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $231.70</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-05-15</strong> - <strong>MKC</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/MKC.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $73.78</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-05-13</strong> - <strong>CHD</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/CHD.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $93.18</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-05-12</strong> - <strong>ESS</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/ESS.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $280.98</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-05-12</strong> - <strong>CVX</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/CVX.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $136.85</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-05-12</strong> - <strong>UDR</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/UDR.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $41.62</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-05-08</strong> - <strong>CPT</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/CPT.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $115.26</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-05-08</strong> - <strong>CCI</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/CCI.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $101.04</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-05-07</strong> - <strong>ALK</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/ALK.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $50.16</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-05-07</strong> - <strong>CBRE</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/CBRE.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $125.01</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-05-06</strong> - <strong>NDAQ</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/NDAQ.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $77.62</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-05-06</strong> - <strong>GS</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/GS.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $543.72</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-05-06</strong> - <strong>META</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/META.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $586.46</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-05-06</strong> - <strong>AMGN</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/AMGN.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $265.91</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-05-06</strong> - <strong>DG</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/DG.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $92.62</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-05-05</strong> - <strong>PG</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/PG.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $156.66</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-05-05</strong> - <strong>MS</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/MS.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $118.06</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-05-05</strong> - <strong>NOC</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/NOC.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $489.06</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-05-05</strong> - <strong>AVGO</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/AVGO.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $199.91</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-05-02</strong> - <strong>NTRS</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/NTRS.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $96.23</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-05-01</strong> - <strong>UAL</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/UAL.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $69.16</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-05-01</strong> - <strong>ISRG</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/ISRG.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $517.18</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-04-30</strong> - <strong>CI</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/CI.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $336.71</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-04-28</strong> - <strong>MDLZ</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/MDLZ.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $64.13</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-04-25</strong> - <strong>SPG</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/SPG.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $152.81</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-04-25</strong> - <strong>HLT</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/HLT.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $219.37</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-04-23</strong> - <strong>D</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/D.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $52.09</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-04-23</strong> - <strong>MET</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/MET.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $72.61</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-04-23</strong> - <strong>STT</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/STT.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $84.29</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-04-22</strong> - <strong>LUV</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/LUV.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $24.47</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-04-22</strong> - <strong>SPGI</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/SPGI.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $464.74</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-04-22</strong> - <strong>AMZN</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/AMZN.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $173.18</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-04-22</strong> - <strong>AXP</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/AXP.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $251.15</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-04-22</strong> - <strong>DIS</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/DIS.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $85.72</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-04-22</strong> - <strong>PFGC</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/PFGC.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $77.86</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-04-22</strong> - <strong>CCL</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/CCL.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $17.98</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-04-21</strong> - <strong>CMA</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/CMA.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $49.47</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-04-21</strong> - <strong>APD</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/APD.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $254.27</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-04-21</strong> - <strong>AMT</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/AMT.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $214.40</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-04-21</strong> - <strong>KDP</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/KDP.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $34.75</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-04-17</strong> - <strong>OKE</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/OKE.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $82.80</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-04-16</strong> - <strong>MCO</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/MCO.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $424.10</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-04-16</strong> - <strong>UNP</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/UNP.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $213.96</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-04-16</strong> - <strong>BAC</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/BAC.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $36.91</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-04-16</strong> - <strong>VFC</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/VFC.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $10.18</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-04-16</strong> - <strong>MAR</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/MAR.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $217.67</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-04-16</strong> - <strong>SYF</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/SYF.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $46.11</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-04-16</strong> - <strong>BLK</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/BLK.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $857.17</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-04-15</strong> - <strong>CFG</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/CFG.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $35.07</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-04-15</strong> - <strong>HBAN</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/HBAN.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $13.15</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-04-15</strong> - <strong>MTB</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/MTB.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $157.23</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-04-15</strong> - <strong>DAL</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/DAL.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $40.44</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-04-14</strong> - <strong>HBAR-USD</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/crypto/HBAR-USD.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $0.17</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-04-14</strong> - <strong>TSLA</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/TSLA.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $252.35</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-04-14</strong> - <strong>EQIX</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/EQIX.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $770.28</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-04-14</strong> - <strong>CRM</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/CRM.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $253.71</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-04-14</strong> - <strong>ITW</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/ITW.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $230.71</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-04-14</strong> - <strong>AAL</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/AAL.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $9.58</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-04-14</strong> - <strong>ZION</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/ZION.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $41.81</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-04-14</strong> - <strong>BUD</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/BUD.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $62.29</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-04-11</strong> - <strong>LTC-USD</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/crypto/LTC-USD.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $76.21</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-04-11</strong> - <strong>ADSK</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/ADSK.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $258.45</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-04-10</strong> - <strong>NCLH</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/NCLH.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $16.69</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-04-10</strong> - <strong>ACN</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/ACN.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $283.80</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-04-10</strong> - <strong>EOG</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/EOG.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $101.83</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-04-08</strong> - <strong>IVZ</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/IVZ.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $11.76</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-04-08</strong> - <strong>GOOG</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/GOOG.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $146.27</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-04-08</strong> - <strong>HD</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/HD.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $331.29</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-04-08</strong> - <strong>GOOGL</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/GOOGL.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $144.40</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-04-08</strong> - <strong>KEY</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/KEY.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $12.92</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-04-08</strong> - <strong>PNC</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/PNC.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $145.61</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-04-07</strong> - <strong>XLM-USD</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/crypto/XLM-USD.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $0.23</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-04-07</strong> - <strong>BTC-USD</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/crypto/BTC-USD.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $79,235.34</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-04-07</strong> - <strong>ADA-USD</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/crypto/ADA-USD.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $0.59</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-04-07</strong> - <strong>PLD</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/PLD.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $92.80</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-04-07</strong> - <strong>NSC</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/NSC.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $204.79</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-04-07</strong> - <strong>RF</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/RF.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $18.28</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-04-07</strong> - <strong>AAPL</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/AAPL.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $180.84</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-04-07</strong> - <strong>ORCL</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/ORCL.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $126.22</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-04-04</strong> - <strong>HON</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/HON.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $177.11</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-04-04</strong> - <strong>AMGN</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/AMGN.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $289.46</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-04-04</strong> - <strong>AVB</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/AVB.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $188.34</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-04-04</strong> - <strong>NOW</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/NOW.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $721.65</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-04-04</strong> - <strong>AWK</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/AWK.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $144.59</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-04-03</strong> - <strong>ANET</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/ANET.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $71.27</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-04-03</strong> - <strong>CHRW</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/CHRW.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $93.70</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-04-03</strong> - <strong>PEG</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/PEG.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $80.27</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-04-03</strong> - <strong>BDX</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/BDX.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $219.07</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-04-03</strong> - <strong>MSI</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/MSI.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $433.37</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-04-03</strong> - <strong>FITB</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/FITB.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $34.84</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-04-02</strong> - <strong>PYPL</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/PYPL.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $67.00</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-04-02</strong> - <strong>USB</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/USB.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $42.09</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-04-01</strong> - <strong>TSN</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/TSN.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $61.99</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-04-01</strong> - <strong>KMB</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/KMB.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $140.32</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-03-31</strong> - <strong>SHW</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/SHW.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $346.86</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-03-27</strong> - <strong>CLX</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/CLX.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $141.44</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-03-27</strong> - <strong>GM</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/GM.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $46.93</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-03-25</strong> - <strong>DLR</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/DLR.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $149.32</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-03-25</strong> - <strong>HPE</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/HPE.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $16.31</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-03-25</strong> - <strong>VRTX</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/VRTX.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $509.04</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-03-21</strong> - <strong>PG</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/PG.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $163.39</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-03-21</strong> - <strong>GPN</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/GPN.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $96.46</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-03-20</strong> - <strong>LIN</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/LIN.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $454.84</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-03-20</strong> - <strong>NVDA</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/NVDA.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $118.52</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-03-20</strong> - <strong>CB</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/CB.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $293.13</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-03-20</strong> - <strong>LOW</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/LOW.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $222.79</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-03-19</strong> - <strong>CAT</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/CAT.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $334.81</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-03-19</strong> - <strong>MNST</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/MNST.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $56.82</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-03-18</strong> - <strong>PLD</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/PLD.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $110.33</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-03-18</strong> - <strong>ED</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/ED.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $105.15</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-03-14</strong> - <strong>DOGE-USD</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/crypto/DOGE-USD.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $0.17</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-03-14</strong> - <strong>VICI</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/VICI.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $30.96</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-03-13</strong> - <strong>SOL-USD</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/crypto/SOL-USD.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $123.29</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-03-13</strong> - <strong>EQR</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/EQR.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $66.23</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-03-13</strong> - <strong>DXC</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/DXC.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $16.85</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-03-12</strong> - <strong>KO</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/KO.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $68.41</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-03-12</strong> - <strong>JNJ</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/JNJ.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $160.29</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-03-12</strong> - <strong>CVS</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/CVS.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $62.97</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-03-11</strong> - <strong>SRE</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/SRE.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $67.10</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-03-11</strong> - <strong>LVS</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/LVS.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $44.14</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-03-11</strong> - <strong>CDNS</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/CDNS.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $234.25</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-03-07</strong> - <strong>ROST</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/ROST.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $134.77</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-03-07</strong> - <strong>JBHT</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/JBHT.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $161.99</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-03-05</strong> - <strong>BXP</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/BXP.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $65.14</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-03-05</strong> - <strong>ROP</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/ROP.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $591.12</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-03-04</strong> - <strong>TROW</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/TROW.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $96.22</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-03-04</strong> - <strong>ETN</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/ETN.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $276.43</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-03-04</strong> - <strong>AIG</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/AIG.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $78.59</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-03-01</strong> - <strong>ETH-USD</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/crypto/ETH-USD.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $2,216.64</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-02-26</strong> - <strong>SO</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/SO.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $86.60</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-02-26</strong> - <strong>MSFT</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/MSFT.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $398.34</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-02-26</strong> - <strong>SYY</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/SYY.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $72.74</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-02-25</strong> - <strong>WPP</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/WPP.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $45.57</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-02-24</strong> - <strong>MMC</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/MMC.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $230.04</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-02-24</strong> - <strong>CMG</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/CMG.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $51.21</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-02-21</strong> - <strong>BDX</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/BDX.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $223.83</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-02-21</strong> - <strong>HST</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/HST.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $15.72</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-02-20</strong> - <strong>MMC</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/MMC.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $227.79</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-02-19</strong> - <strong>FIS</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/FIS.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $68.29</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-02-19</strong> - <strong>PRU</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/PRU.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $107.45</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-02-18</strong> - <strong>SO</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/SO.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $83.81</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-02-14</strong> - <strong>PG</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/PG.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $159.66</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-02-14</strong> - <strong>CB</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/CB.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $262.80</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-02-14</strong> - <strong>UNP</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/UNP.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $244.84</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-02-14</strong> - <strong>NTAP</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/NTAP.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $117.22</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-02-12</strong> - <strong>FDX</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/FDX.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $257.89</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-02-07</strong> - <strong>ABBV</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/ABBV.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $185.90</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-02-07</strong> - <strong>PSA</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/PSA.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $293.58</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-02-06</strong> - <strong>INTU</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/INTU.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $587.30</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-02-06</strong> - <strong>VICI</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/VICI.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $28.92</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-02-06</strong> - <strong>MNST</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/MNST.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $46.30</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-02-05</strong> - <strong>TSN</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/TSN.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $55.62</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-02-04</strong> - <strong>WYNN</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/WYNN.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $82.39</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-02-04</strong> - <strong>HPQ</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/HPQ.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $31.02</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-02-03</strong> - <strong>LDOS</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/LDOS.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $140.54</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-01-31</strong> - <strong>UNH</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/UNH.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $533.01</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-01-28</strong> - <strong>CSX</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/CSX.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $32.28</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-01-28</strong> - <strong>NOC</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/NOC.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $480.27</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-01-28</strong> - <strong>TXN</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/TXN.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $174.89</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-01-27</strong> - <strong>WYNN</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/WYNN.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $83.95</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-01-27</strong> - <strong>EIX</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/EIX.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $55.13</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-01-24</strong> - <strong>PVH</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/PVH.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $90.17</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-01-21</strong> - <strong>ABBV</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/ABBV.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $168.35</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-01-21</strong> - <strong>DELL</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/DELL.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $109.56</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-01-17</strong> - <strong>LMT</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/LMT.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $479.90</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-01-17</strong> - <strong>OMC</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/OMC.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $83.10</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-01-15</strong> - <strong>PVH</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/PVH.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $98.87</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-01-14</strong> - <strong>WYNN</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/WYNN.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $81.01</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-01-13</strong> - <strong>NEE</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/NEE.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $65.37</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-01-10</strong> - <strong>ROP</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/ROP.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $500.43</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-01-08</strong> - <strong>O</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/O.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $50.11</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-01-08</strong> - <strong>ED</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/ED.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $86.04</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-01-07</strong> - <strong>ADI</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/ADI.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $213.12</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-01-06</strong> - <strong>VRTX</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/VRTX.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $402.49</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-01-03</strong> - <strong>STX</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/STX.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $87.68</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-01-03</strong> - <strong>XOM</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/XOM.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $104.04</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-01-03</strong> - <strong>ES</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/ES.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $55.30</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-01-03</strong> - <strong>AWK</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/AWK.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $120.80</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-01-02</strong> - <strong>LIN</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/LIN.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $410.17</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2025-01-02</strong> - <strong>AIG</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/AIG.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $71.83</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2024-12-31</strong> - <strong>ZTS</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/ZTS.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $160.79</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2024-12-31</strong> - <strong>JNJ</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/JNJ.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $141.22</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2024-12-30</strong> - <strong>AMT</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/AMT.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $177.46</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2024-12-30</strong> - <strong>CCI</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/CCI.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $86.39</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2024-12-27</strong> - <strong>KMB</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/KMB.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $128.15</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2024-12-26</strong> - <strong>KO</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/KO.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $61.20</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2024-12-26</strong> - <strong>WY</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/WY.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $27.52</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2024-12-24</strong> - <strong>HCA</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/HCA.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $302.80</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2024-12-23</strong> - <strong>KDP</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/KDP.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $31.30</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2024-12-19</strong> - <strong>UNP</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/UNP.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $219.22</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2024-12-19</strong> - <strong>GD</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/GD.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $255.04</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2024-12-18</strong> - <strong>CL</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/CL.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $90.56</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2024-12-18</strong> - <strong>HST</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/HST.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $16.60</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2024-12-17</strong> - <strong>CPB</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/CPB.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $41.20</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2024-12-17</strong> - <strong>EXPD</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/EXPD.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $115.13</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2024-12-16</strong> - <strong>GPN</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/GPN.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $112.96</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2024-12-16</strong> - <strong>CDNS</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/CDNS.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $313.49</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2024-12-13</strong> - <strong>AMGN</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/AMGN.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $263.96</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2024-12-11</strong> - <strong>MSFT</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/MSFT.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $446.54</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2024-12-11</strong> - <strong>GIS</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/GIS.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $62.63</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2024-12-06</strong> - <strong>MCK</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/MCK.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $601.55</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2024-12-06</strong> - <strong>DIS</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/DIS.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $115.72</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2024-12-06</strong> - <strong>FCX</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/FCX.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $41.44</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2024-12-05</strong> - <strong>ETH-USD</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/crypto/ETH-USD.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $3,811.01</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2024-12-05</strong> - <strong>PFE</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/PFE.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $23.97</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2024-12-04</strong> - <strong>PLD</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/PLD.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $110.99</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2024-12-03</strong> - <strong>MDLZ</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/MDLZ.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $62.90</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2024-12-03</strong> - <strong>BUD</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/BUD.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $52.95</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2024-11-29</strong> - <strong>MSFT</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/MSFT.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $421.15</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2024-11-29</strong> - <strong>BDX</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/BDX.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $217.35</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2024-11-29</strong> - <strong>CAG</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/CAG.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $25.77</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2024-11-28</strong> - <strong>HBAR-USD</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/crypto/HBAR-USD.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $0.14</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2024-11-27</strong> - <strong>DHR</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/DHR.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $237.39</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2024-11-26</strong> - <strong>CVX</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/CVX.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $155.33</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2024-11-25</strong> - <strong>CSX</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/CSX.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $36.06</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2024-11-25</strong> - <strong>MNST</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/MNST.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $54.98</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2024-11-25</strong> - <strong>TAP</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/TAP.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $58.68</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2024-11-22</strong> - <strong>PEP</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/PEP.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $155.97</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>2024-11-22</strong> - <strong>AAL</strong> <span class="tag" style="background: #d4edda; color: #155724;">Golden Cross</span> <a href="history/stocks/AAL.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $14.38</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>2024-11-22</strong> - <strong>TMO</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Death Cross</span> <a href="history/stocks/TMO.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $511.46</span>
+</div></div>
+
+    <div style="margin-top: 40px; text-align: center; color: #999; font-size: 0.8em;">
+        Generated by Crypto Signal Station
+    </div>
+</div>
+</body>
+</html>
