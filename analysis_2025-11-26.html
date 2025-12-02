@@ -1,0 +1,241 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto Signal Station</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 10px; background-color: #f4f4f9; color: #333; }
+        .container { max-width: 100%; margin: 0 auto; background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        @media (min-width: 768px) {
+            .container { max-width: 1000px; padding: 30px; }
+            body { padding: 20px; }
+        }
+        h1 { color: #2c3e50; border-bottom: 2px solid #eee; padding-bottom: 10px; font-size: 1.5em; }
+        h2 { color: #34495e; margin-top: 30px; font-size: 1.3em; }
+        h3 { color: #7f8c8d; margin-top: 20px; border-bottom: 1px solid #eee; padding-bottom: 5px; }
+        .report-link { display: block; padding: 15px; margin: 10px 0; background: #f8f9fa; text-decoration: none; color: #2c3e50; border-radius: 4px; transition: background 0.2s; border: 1px solid #eee; }
+        .report-link:hover { background: #e9ecef; border-color: #ddd; }
+        .signal-row { padding: 15px 0; border-bottom: 1px solid #f1f1f1; display: flex; flex-direction: column; }
+        .signal-row:last-child { border-bottom: none; }
+        .signal-info { margin-bottom: 10px; }
+        .signal-chart-container { width: 100%; overflow-x: hidden; }
+        .tag { display: inline-block; padding: 4px 8px; border-radius: 4px; font-size: 0.85em; font-weight: bold; margin-right: 5px; margin-bottom: 5px; }
+        .tag-buy { background-color: #d4edda; color: #155724; }
+        .tag-sell { background-color: #f8d7da; color: #721c24; }
+        .back-link { display: inline-block; margin-bottom: 20px; color: #666; text-decoration: none; }
+        .back-link:hover { text-decoration: underline; }
+        .meta { color: #999; font-size: 0.9em; display: block; margin-top: 5px; }
+        .history-link { font-size: 0.9em; margin-left: 10px; color: #007bff; text-decoration: none; white-space: nowrap; }
+        .history-link:hover { text-decoration: underline; }
+        .nav-bar { margin-bottom: 20px; padding-bottom: 10px; border-bottom: 1px solid #eee; display: flex; gap: 20px; }
+        .nav-link { text-decoration: none; color: #2c3e50; font-weight: bold; font-size: 1.1em; padding: 5px 0; }
+        .nav-link:hover { color: #007bff; }
+        .nav-link.active { color: #007bff; border-bottom: 2px solid #007bff; }
+        /* Grid for History Index */
+        .asset-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 10px; margin-top: 10px; }
+        .asset-link { display: block; padding: 10px; background: #fff; border: 1px solid #ddd; border-radius: 4px; text-align: center; text-decoration: none; color: #2c3e50; font-weight: bold; transition: all 0.2s; }
+        .asset-link:hover { background: #007bff; color: white; border-color: #007bff; transform: translateY(-2px); box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .asset-bull { background-color: #d4edda; color: #155724; border-color: #c3e6cb; }
+        .asset-bull:hover { background-color: #c3e6cb; color: #155724; }
+        .asset-bear { background-color: #f8d7da; color: #721c24; border-color: #f5c6cb; }
+        .asset-bear:hover { background-color: #f5c6cb; color: #721c24; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="nav-bar">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="history.html" class="nav-link">History</a>
+        <a href="analysis.html" class="nav-link">Analysis</a>
+        <a href="crosses.html" class="nav-link">Crosses</a>
+    </div>
+
+<h1>Analysis Report: 2025-11-26</h1>
+<p>Analysis Report for 2025-11-26</p>
+<h2 style="color: #155724; border-bottom: 2px solid #155724; padding-bottom: 5px;">Good Buy</h2>
+<div class="signal-row">
+<div class="signal-info">
+<strong>EQIX</strong> <span class='tag' style='background:#eee;'>Stocks/1d</span><a href="history/stocks/EQIX.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class='meta'>(Price: $750.41, RSI: 33.3, MFI: 24.7, StochRSI: 0.11/0.09, BB: 0.15, MACD: -5.96)</span>
+</div>
+</div>
+<h2 style="color: #721c24; border-bottom: 2px solid #721c24; padding-bottom: 5px;">Great Sell</h2>
+<div class="signal-row">
+<div class="signal-info">
+<strong>HCA</strong> <span class='tag' style='background:#eee;'>Stocks/1d</span><a href="history/stocks/HCA.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class='meta'>(Price: $514.76, RSI: 77.5, MFI: 91.9, StochRSI: 0.98/0.88, BB: 1.08, MACD: 2.89)</span>
+</div>
+</div>
+<div class="signal-row">
+<div class="signal-info">
+<strong>HIG</strong> <span class='tag' style='background:#eee;'>Stocks/1d</span><a href="history/stocks/HIG.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class='meta'>(Price: $137.39, RSI: 70.6, MFI: 80.9, StochRSI: 0.98/0.98, BB: 0.85, MACD: 0.76)</span>
+</div>
+</div>
+<div class="signal-row">
+<div class="signal-info">
+<strong>JNJ</strong> <span class='tag' style='background:#eee;'>Stocks/1d</span><a href="history/stocks/JNJ.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class='meta'>(Price: $207.56, RSI: 83.5, MFI: 89.3, StochRSI: 1.00/1.00, BB: 0.91, MACD: 1.22)</span>
+</div>
+</div>
+<div class="signal-row">
+<div class="signal-info">
+<strong>L</strong> <span class='tag' style='background:#eee;'>Stocks/1d</span><a href="history/stocks/L.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class='meta'>(Price: $108.26, RSI: 79.5, MFI: 90.1, StochRSI: 1.00/0.98, BB: 0.93, MACD: 0.42)</span>
+</div>
+</div>
+<div class="signal-row">
+<div class="signal-info">
+<strong>MDT</strong> <span class='tag' style='background:#eee;'>Stocks/1d</span><a href="history/stocks/MDT.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class='meta'>(Price: $105.02, RSI: 76.6, MFI: 94.9, StochRSI: 0.98/0.96, BB: 0.94, MACD: 1.17)</span>
+</div>
+</div>
+<div class="signal-row">
+<div class="signal-info">
+<strong>MRK</strong> <span class='tag' style='background:#eee;'>Stocks/1d</span><a href="history/stocks/MRK.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class='meta'>(Price: $104.63, RSI: 79.5, MFI: 94.8, StochRSI: 0.96/0.95, BB: 0.98, MACD: 1.44)</span>
+</div>
+</div>
+<div class="signal-row">
+<div class="signal-info">
+<strong>REGN</strong> <span class='tag' style='background:#eee;'>Stocks/1d</span><a href="history/stocks/REGN.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class='meta'>(Price: $784.61, RSI: 79.2, MFI: 87.2, StochRSI: 0.92/0.88, BB: 0.97, MACD: 8.51)</span>
+</div>
+</div>
+<div class="signal-row">
+<div class="signal-info">
+<strong>TRV</strong> <span class='tag' style='background:#eee;'>Stocks/1d</span><a href="history/stocks/TRV.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class='meta'>(Price: $294.52, RSI: 72.0, MFI: 80.4, StochRSI: 1.00/0.97, BB: 0.87, MACD: 1.03)</span>
+</div>
+</div>
+<h2 style="color: #721c24; border-bottom: 2px solid #721c24; padding-bottom: 5px;">Good Sell</h2>
+<div class="signal-row">
+<div class="signal-info">
+<strong>AAL</strong> <span class='tag' style='background:#eee;'>Stocks/1d</span><a href="history/stocks/AAL.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class='meta'>(Price: $13.93, RSI: 62.0, MFI: 73.0, StochRSI: 0.84/0.63, BB: 0.99, MACD: 0.05)</span>
+</div>
+</div>
+<div class="signal-row">
+<div class="signal-info">
+<strong>AEE</strong> <span class='tag' style='background:#eee;'>Stocks/1d</span><a href="history/stocks/AEE.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class='meta'>(Price: $106.02, RSI: 60.3, MFI: 75.8, StochRSI: 0.73/0.65, BB: 0.86, MACD: 0.10)</span>
+</div>
+</div>
+<div class="signal-row">
+<div class="signal-info">
+<strong>AZO</strong> <span class='tag' style='background:#eee;'>Stocks/1d</span><a href="history/stocks/AZO.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class='meta'>(Price: $3,967.95, RSI: 60.3, MFI: 77.6, StochRSI: 0.93/0.93, BB: 0.96, MACD: 33.50)</span>
+</div>
+</div>
+<div class="signal-row">
+<div class="signal-info">
+<strong>CBRE</strong> <span class='tag' style='background:#eee;'>Stocks/1d</span><a href="history/stocks/CBRE.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class='meta'>(Price: $162.21, RSI: 64.2, MFI: 70.2, StochRSI: 1.00/0.95, BB: 1.09, MACD: 1.30)</span>
+</div>
+</div>
+<div class="signal-row">
+<div class="signal-info">
+<strong>CFG</strong> <span class='tag' style='background:#eee;'>Stocks/1d</span><a href="history/stocks/CFG.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class='meta'>(Price: $53.98, RSI: 62.3, MFI: 71.3, StochRSI: 0.95/0.85, BB: 1.01, MACD: 0.30)</span>
+</div>
+</div>
+<div class="signal-row">
+<div class="signal-info">
+<strong>CINF</strong> <span class='tag' style='background:#eee;'>Stocks/1d</span><a href="history/stocks/CINF.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class='meta'>(Price: $168.48, RSI: 66.0, MFI: 73.2, StochRSI: 0.78/0.69, BB: 0.82, MACD: 0.44)</span>
+</div>
+</div>
+<div class="signal-row">
+<div class="signal-info">
+<strong>CMA</strong> <span class='tag' style='background:#eee;'>Stocks/1d</span><a href="history/stocks/CMA.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class='meta'>(Price: $80.12, RSI: 62.2, MFI: 75.3, StochRSI: 0.81/0.63, BB: 0.94, MACD: 0.05)</span>
+</div>
+</div>
+<div class="signal-row">
+<div class="signal-info">
+<strong>CMS</strong> <span class='tag' style='background:#eee;'>Stocks/1d</span><a href="history/stocks/CMS.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class='meta'>(Price: $75.27, RSI: 60.7, MFI: 80.4, StochRSI: 0.80/0.67, BB: 0.90, MACD: 0.10)</span>
+</div>
+</div>
+<div class="signal-row">
+<div class="signal-info">
+<strong>D</strong> <span class='tag' style='background:#eee;'>Stocks/1d</span><a href="history/stocks/D.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class='meta'>(Price: $62.54, RSI: 61.7, MFI: 73.6, StochRSI: 0.82/0.76, BB: 0.94, MACD: 0.16)</span>
+</div>
+</div>
+<div class="signal-row">
+<div class="signal-info">
+<strong>DAL</strong> <span class='tag' style='background:#eee;'>Stocks/1d</span><a href="history/stocks/DAL.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class='meta'>(Price: $64.27, RSI: 63.5, MFI: 77.0, StochRSI: 1.00/0.84, BB: 1.18, MACD: 0.62)</span>
+</div>
+</div>
+<div class="signal-row">
+<div class="signal-info">
+<strong>GM</strong> <span class='tag' style='background:#eee;'>Stocks/1d</span><a href="history/stocks/GM.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class='meta'>(Price: $72.81, RSI: 67.6, MFI: 76.4, StochRSI: 0.65/0.49, BB: 0.93, MACD: -0.08)</span>
+</div>
+</div>
+<div class="signal-row">
+<div class="signal-info">
+<strong>HBAN</strong> <span class='tag' style='background:#eee;'>Stocks/1d</span><a href="history/stocks/HBAN.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class='meta'>(Price: $16.27, RSI: 60.0, MFI: 74.0, StochRSI: 1.00/0.92, BB: 1.03, MACD: 0.12)</span>
+</div>
+</div>
+<div class="signal-row">
+<div class="signal-info">
+<strong>HSY</strong> <span class='tag' style='background:#eee;'>Stocks/1d</span><a href="history/stocks/HSY.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class='meta'>(Price: $188.20, RSI: 65.1, MFI: 85.9, StochRSI: 1.00/0.99, BB: 0.88, MACD: 2.02)</span>
+</div>
+</div>
+<div class="signal-row">
+<div class="signal-info">
+<strong>LNT</strong> <span class='tag' style='background:#eee;'>Stocks/1d</span><a href="history/stocks/LNT.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class='meta'>(Price: $69.18, RSI: 64.1, MFI: 77.2, StochRSI: 0.96/0.87, BB: 1.06, MACD: 0.11)</span>
+</div>
+</div>
+<div class="signal-row">
+<div class="signal-info">
+<strong>MAR</strong> <span class='tag' style='background:#eee;'>Stocks/1d</span><a href="history/stocks/MAR.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class='meta'>(Price: $304.65, RSI: 73.5, MFI: 76.3, StochRSI: 0.97/0.87, BB: 0.91, MACD: 1.66)</span>
+</div>
+</div>
+<div class="signal-row">
+<div class="signal-info">
+<strong>RL</strong> <span class='tag' style='background:#eee;'>Stocks/1d</span><a href="history/stocks/RL.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class='meta'>(Price: $371.22, RSI: 72.9, MFI: 78.0, StochRSI: 1.00/0.92, BB: 1.14, MACD: 4.04)</span>
+</div>
+</div>
+<div class="signal-row">
+<div class="signal-info">
+<strong>ROST</strong> <span class='tag' style='background:#eee;'>Stocks/1d</span><a href="history/stocks/ROST.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class='meta'>(Price: $177.69, RSI: 81.2, MFI: 78.4, StochRSI: 1.00/0.91, BB: 1.07, MACD: 1.54)</span>
+</div>
+</div>
+<div class="signal-row">
+<div class="signal-info">
+<strong>USB</strong> <span class='tag' style='background:#eee;'>Stocks/1d</span><a href="history/stocks/USB.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class='meta'>(Price: $48.95, RSI: 62.2, MFI: 72.7, StochRSI: 0.97/0.90, BB: 1.03, MACD: 0.24)</span>
+</div>
+</div>
+<div class="signal-row">
+<div class="signal-info">
+<strong>VFC</strong> <span class='tag' style='background:#eee;'>Stocks/1d</span><a href="history/stocks/VFC.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class='meta'>(Price: $17.27, RSI: 68.5, MFI: 87.4, StochRSI: 1.00/0.94, BB: 1.07, MACD: 0.28)</span>
+</div>
+</div>
+<div class="signal-row">
+<div class="signal-info">
+<strong>WELL</strong> <span class='tag' style='background:#eee;'>Stocks/1d</span><a href="history/stocks/WELL.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class='meta'>(Price: $206.25, RSI: 82.8, MFI: 79.8, StochRSI: 1.00/0.95, BB: 0.95, MACD: 0.88)</span>
+</div>
+</div>
+
+    <div style="margin-top: 40px; text-align: center; color: #999; font-size: 0.8em;">
+        Generated by Crypto Signal Station
+    </div>
+</div>
+</body>
+</html>
