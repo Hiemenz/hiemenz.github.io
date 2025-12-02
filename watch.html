@@ -1,0 +1,2534 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto Signal Station</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 10px; background-color: #f4f4f9; color: #333; }
+        .container { max-width: 100%; margin: 0 auto; background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        @media (min-width: 768px) {
+            .container { max-width: 1000px; padding: 30px; }
+            body { padding: 20px; }
+        }
+        h1 { color: #2c3e50; border-bottom: 2px solid #eee; padding-bottom: 10px; font-size: 1.5em; }
+        h2 { color: #34495e; margin-top: 30px; font-size: 1.3em; }
+        h3 { color: #7f8c8d; margin-top: 20px; border-bottom: 1px solid #eee; padding-bottom: 5px; }
+        .report-link { display: block; padding: 15px; margin: 10px 0; background: #f8f9fa; text-decoration: none; color: #2c3e50; border-radius: 4px; transition: background 0.2s; border: 1px solid #eee; }
+        .report-link:hover { background: #e9ecef; border-color: #ddd; }
+        .signal-row { padding: 15px 0; border-bottom: 1px solid #f1f1f1; display: flex; flex-direction: column; }
+        .signal-row:last-child { border-bottom: none; }
+        .signal-info { margin-bottom: 10px; }
+        .signal-chart-container { width: 100%; overflow-x: hidden; }
+        .tag { display: inline-block; padding: 4px 8px; border-radius: 4px; font-size: 0.85em; font-weight: bold; margin-right: 5px; margin-bottom: 5px; }
+        .tag-buy { background-color: #d4edda; color: #155724; }
+        .tag-sell { background-color: #f8d7da; color: #721c24; }
+        .back-link { display: inline-block; margin-bottom: 20px; color: #666; text-decoration: none; }
+        .back-link:hover { text-decoration: underline; }
+        .meta { color: #999; font-size: 0.9em; display: block; margin-top: 5px; }
+        .history-link { font-size: 0.9em; margin-left: 10px; color: #007bff; text-decoration: none; white-space: nowrap; }
+        .history-link:hover { text-decoration: underline; }
+        .nav-bar { margin-bottom: 20px; padding-bottom: 10px; border-bottom: 1px solid #eee; display: flex; gap: 20px; }
+        .nav-link { text-decoration: none; color: #2c3e50; font-weight: bold; font-size: 1.1em; padding: 5px 0; }
+        .nav-link:hover { color: #007bff; }
+        .nav-link.active { color: #007bff; border-bottom: 2px solid #007bff; }
+        /* Grid for History Index */
+        .asset-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 10px; margin-top: 10px; }
+        .asset-link { display: block; padding: 10px; background: #fff; border: 1px solid #ddd; border-radius: 4px; text-align: center; text-decoration: none; color: #2c3e50; font-weight: bold; transition: all 0.2s; }
+        .asset-link:hover { background: #007bff; color: white; border-color: #007bff; transform: translateY(-2px); box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .asset-bull { background-color: #d4edda; color: #155724; border-color: #c3e6cb; }
+        .asset-bull:hover { background-color: #c3e6cb; color: #155724; }
+        .asset-bear { background-color: #f8d7da; color: #721c24; border-color: #f5c6cb; }
+        .asset-bear:hover { background-color: #f5c6cb; color: #721c24; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="nav-bar">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="history.html" class="nav-link">History</a>
+        <a href="analysis.html" class="nav-link">Analysis</a>
+        <a href="crosses.html" class="nav-link">Crosses</a>
+        <a href="watch.html" class="nav-link">Watch</a>
+        <a href="stoch_crosses.html" class="nav-link">1w Stoch</a>
+    </div>
+
+<h1>Watch List - Assets Near Signals</h1>
+<p><i>Assets approaching buy/sell signal thresholds</i></p>
+<h2>CRYPTO</h2>
+<h3>1d Timeframe</h3>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>DOGE-USD</strong> <span class="tag" style="background: #d4edda; color: #155724;">Near Buy</span> <a href="history/crypto/DOGE-USD.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $0.15, RSI: 38.4, Market: Bear</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>XLM-USD</strong> <span class="tag" style="background: #d4edda; color: #155724;">Near Buy</span> <a href="history/crypto/XLM-USD.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $0.25, RSI: 41.1, Market: Bear</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>BTC-USD</strong> <span class="tag" style="background: #d4edda; color: #155724;">Near Buy</span> <a href="history/crypto/BTC-USD.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $90,394.31, RSI: 39.6, Market: Bear</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>XRP-USD</strong> <span class="tag" style="background: #d4edda; color: #155724;">Near Buy</span> <a href="history/crypto/XRP-USD.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $2.16, MFI: 29.3, Market: Bear</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>ADA-USD</strong> <span class="tag" style="background: #d4edda; color: #155724;">Near Buy</span> <a href="history/crypto/ADA-USD.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $0.42, RSI: 31.4, MFI: 25.2, Market: Bear</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>LTC-USD</strong> <span class="tag" style="background: #d4edda; color: #155724;">Near Buy</span> <a href="history/crypto/LTC-USD.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $82.56, RSI: 38.7, Market: Bear</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>SOL-USD</strong> <span class="tag" style="background: #d4edda; color: #155724;">Near Buy</span> <a href="history/crypto/SOL-USD.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $133.56, RSI: 37.9, Market: Bear</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>ETH-USD</strong> <span class="tag" style="background: #d4edda; color: #155724;">Near Buy</span> <a href="history/crypto/ETH-USD.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $2,992.11, RSI: 40.3, Market: Bear</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>HBAR-USD</strong> <span class="tag" style="background: #d4edda; color: #155724;">Near Buy</span> <a href="history/crypto/HBAR-USD.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $0.14, RSI: 40.1, Market: Bear</span>
+</div></div>
+<h3>2wk Timeframe</h3>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>LTC-USD</strong> <span class="tag" style="background: #d4edda; color: #155724;">Near Buy</span> <a href="history/crypto/LTC-USD.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $82.56, RSI: 44.0, Market: Bear</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>SOL-USD</strong> <span class="tag" style="background: #d4edda; color: #155724;">Near Buy</span> <a href="history/crypto/SOL-USD.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $133.56, RSI: 42.4, Market: Bear</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>HBAR-USD</strong> <span class="tag" style="background: #d4edda; color: #155724;">Near Buy</span> <a href="history/crypto/HBAR-USD.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $0.14, RSI: 43.9, Market: Bear</span>
+</div></div>
+<h2>STOCKS</h2>
+<h3>1d Timeframe</h3>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>LUV</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/LUV.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $34.81, RSI: 62.8, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>IVZ</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/IVZ.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $24.45, RSI: 61.6, StochRSI: 0.78, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>BXP</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/BXP.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $72.36, RSI: 55.2, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>UAL</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/UAL.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $101.96, RSI: 59.2, MFI: 68.2, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>QCOM</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/QCOM.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $168.09, StochRSI: 0.66, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>EL</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/EL.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $94.07, RSI: 55.4, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>DLR</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/DLR.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $160.12, StochRSI: 0.71, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>LIN</strong> <span class="tag" style="background: #d4edda; color: #155724;">Near Buy</span> <a href="history/stocks/LIN.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $410.32, RSI: 34.1, MFI: 32.0, Market: Bear</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>HCA</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/HCA.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $508.29, StochRSI: 0.67, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>GILD</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/GILD.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $125.84, RSI: 56.4, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>PYPL</strong> <span class="tag" style="background: #d4edda; color: #155724;">Near Buy</span> <a href="history/stocks/PYPL.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $62.69, RSI: 44.7, Market: Bear</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>IBM</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/IBM.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $308.58, RSI: 58.9, StochRSI: 0.68, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>CSCO</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/CSCO.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $76.94, RSI: 61.9, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>STX</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/STX.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $276.69, RSI: 59.2, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>INTU</strong> <span class="tag" style="background: #d4edda; color: #155724;">Near Buy</span> <a href="history/stocks/INTU.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $634.08, RSI: 41.4, Market: Bear</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>WYNN</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/WYNN.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $128.68, RSI: 58.8, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>TROW</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/TROW.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $102.38, MFI: 71.5, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>WRB</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/WRB.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $77.69, RSI: 60.7, MFI: 75.6, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>SPG</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/SPG.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $186.32, RSI: 62.4, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>LMT</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/LMT.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $457.86, StochRSI: 0.64, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>ISRG</strong> <span class="tag" style="background: #d4edda; color: #155724;">Near Buy</span> <a href="history/stocks/ISRG.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $573.48, StochRSI: 0.30, Market: Bear</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>PLD</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/PLD.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $128.53, RSI: 66.4, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>FANG</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/FANG.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $152.59, RSI: 63.4, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>AXP</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/AXP.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $365.27, RSI: 60.1, MFI: 65.4, StochRSI: 0.62, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>DLTR</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/DLTR.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $110.81, RSI: 65.1, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>TRV</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/TRV.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $292.86, RSI: 67.8, MFI: 77.1, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>CHRW</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/CHRW.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $158.87, RSI: 69.6, MFI: 68.6, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>CB</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/CB.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $296.18, RSI: 61.4, MFI: 72.4, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>RCL</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/RCL.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $266.25, MFI: 67.7, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>DVN</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/DVN.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $37.06, RSI: 68.6, MFI: 65.7, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>CAT</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/CAT.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $575.76, RSI: 63.0, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>NDAQ</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/NDAQ.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $90.92, RSI: 64.3, MFI: 67.1, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>BK</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/BK.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $112.10, RSI: 62.9, StochRSI: 0.72, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>HPQ</strong> <span class="tag" style="background: #d4edda; color: #155724;">Near Buy</span> <a href="history/stocks/HPQ.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $24.42, RSI: 44.5, Market: Bear</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>XEL</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/XEL.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $82.11, RSI: 61.8, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>WMB</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/WMB.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $60.93, RSI: 56.6, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>NSC</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/NSC.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $292.09, RSI: 61.8, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>PEG</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/PEG.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $83.52, RSI: 56.6, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>TPR</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/TPR.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $109.28, MFI: 72.0, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>GS</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/GS.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $826.04, RSI: 62.3, StochRSI: 0.65, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>PAYC</strong> <span class="tag" style="background: #d4edda; color: #155724;">Near Buy</span> <a href="history/stocks/PAYC.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $161.17, RSI: 33.7, Market: Bear</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>VTR</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/VTR.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $80.63, MFI: 72.9, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>NTRS</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/NTRS.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $131.34, RSI: 58.4, MFI: 71.2, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>PFE</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/PFE.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $25.74, RSI: 60.2, MFI: 73.1, StochRSI: 0.62, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>MCK</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/MCK.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $880.30, RSI: 67.7, MFI: 66.5, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>CFG</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/CFG.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $54.10, RSI: 62.8, MFI: 67.2, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>PSA</strong> <span class="tag" style="background: #d4edda; color: #155724;">Near Buy</span> <a href="history/stocks/PSA.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $274.54, MFI: 33.1, Market: Bear</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>CME</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/CME.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $281.46, RSI: 60.8, MFI: 69.4, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>NEE</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/NEE.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $86.29, RSI: 62.8, MFI: 68.4, StochRSI: 0.75, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>DHR</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/DHR.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $226.78, RSI: 61.8, MFI: 66.8, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>ORLY</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/ORLY.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $101.70, RSI: 59.7, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>MSI</strong> <span class="tag" style="background: #d4edda; color: #155724;">Near Buy</span> <a href="history/stocks/MSI.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $369.68, MFI: 26.9, Market: Bear</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>AMGN</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/AMGN.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $345.46, MFI: 70.2, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>UNP</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/UNP.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $231.83, RSI: 65.2, MFI: 68.2, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>RF</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/RF.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $25.19, RSI: 56.1, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>CSX</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/CSX.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $35.36, RSI: 55.4, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>ALL</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/ALL.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $211.98, RSI: 61.1, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>ETN</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/ETN.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $345.89, StochRSI: 0.62, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>DE</strong> <span class="tag" style="background: #d4edda; color: #155724;">Near Buy</span> <a href="history/stocks/DE.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $464.49, RSI: 44.2, Market: Bear</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>MS</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/MS.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $169.66, RSI: 62.0, StochRSI: 0.76, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>ARE</strong> <span class="tag" style="background: #d4edda; color: #155724;">Near Buy</span> <a href="history/stocks/ARE.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $53.67, RSI: 38.3, Market: Bear</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>AZO</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/AZO.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $3,954.33, RSI: 58.7, MFI: 76.7, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>ADI</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/ADI.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $265.34, RSI: 69.8, MFI: 68.1, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>AMAT</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/AMAT.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $252.25, RSI: 64.3, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>PVH</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/PVH.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $84.76, RSI: 62.5, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>AEP</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/AEP.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $123.77, RSI: 64.4, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>CRM</strong> <span class="tag" style="background: #d4edda; color: #155724;">Near Buy</span> <a href="history/stocks/CRM.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $230.54, RSI: 41.7, Market: Bear</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>MU</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/MU.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $236.48, RSI: 57.1, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>C</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/C.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $103.60, RSI: 61.1, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>DUK</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/DUK.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $123.94, StochRSI: 0.75, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>COF</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/COF.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $219.07, RSI: 57.3, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>JBHT</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/JBHT.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $173.96, RSI: 64.7, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>KEY</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/KEY.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $18.38, RSI: 61.2, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>WDC</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/WDC.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $163.33, RSI: 60.6, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>HLT</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/HLT.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $285.03, RSI: 67.3, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>BAC</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/BAC.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $53.65, RSI: 59.3, StochRSI: 0.80, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>JPM</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/JPM.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $313.08, RSI: 58.5, StochRSI: 0.66, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>EXC</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/EXC.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $47.12, RSI: 59.5, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>INTC</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/INTC.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $40.56, RSI: 64.4, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>PEP</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/PEP.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $148.74, RSI: 57.5, MFI: 69.2, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>SYY</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/SYY.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $76.20, MFI: 65.0, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>EIX</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/EIX.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $58.89, RSI: 58.4, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>SRE</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/SRE.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $94.72, RSI: 62.1, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>FCX</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/FCX.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $42.98, RSI: 59.2, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>ED</strong> <span class="tag" style="background: #d4edda; color: #155724;">Near Buy</span> <a href="history/stocks/ED.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $100.36, StochRSI: 0.35, Market: Bear</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>LVS</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/LVS.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $68.16, StochRSI: 0.65, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>WFC</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/WFC.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $85.85, RSI: 56.2, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>CINF</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/CINF.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $167.59, RSI: 63.2, MFI: 67.6, StochRSI: 0.65, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>NOW</strong> <span class="tag" style="background: #d4edda; color: #155724;">Near Buy</span> <a href="history/stocks/NOW.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $812.41, RSI: 35.6, MFI: 32.2, Market: Bear</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>LRCX</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/LRCX.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $156.00, RSI: 55.3, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>PNC</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/PNC.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $190.72, RSI: 59.1, MFI: 70.0, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>TMO</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/TMO.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $590.83, RSI: 63.6, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>LB</strong> <span class="tag" style="background: #d4edda; color: #155724;">Near Buy</span> <a href="history/stocks/LB.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $56.95, RSI: 43.0, MFI: 33.9, Market: Bear</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>WMT</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/WMT.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $110.51, RSI: 66.6, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>MTB</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/MTB.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $188.72, RSI: 55.2, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>ZION</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/ZION.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $53.23, RSI: 56.8, MFI: 69.4, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>FITB</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/FITB.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $43.46, RSI: 58.4, MFI: 67.3, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>USFD</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/USFD.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $78.67, RSI: 66.3, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>AVGO</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/AVGO.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $402.96, RSI: 68.3, MFI: 68.1, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>ADBE</strong> <span class="tag" style="background: #d4edda; color: #155724;">Near Buy</span> <a href="history/stocks/ADBE.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $320.13, RSI: 40.9, MFI: 32.8, Market: Bear</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>DG</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/DG.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $109.49, RSI: 66.2, MFI: 66.2, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>ORCL</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/ORCL.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $201.95, StochRSI: 0.64, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>CBRE</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/CBRE.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $161.83, RSI: 63.2, MFI: 65.2, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>EXPD</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/EXPD.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $146.90, StochRSI: 0.71, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>COKE</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/COKE.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $162.95, MFI: 75.6, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>AIG</strong> <span class="tag" style="background: #d4edda; color: #155724;">Near Buy</span> <a href="history/stocks/AIG.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $76.16, RSI: 44.8, Market: Bear</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>ROP</strong> <span class="tag" style="background: #d4edda; color: #155724;">Near Buy</span> <a href="history/stocks/ROP.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $446.22, RSI: 40.7, Market: Bear</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>CVS</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/CVS.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $80.36, RSI: 58.1, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>PBI</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/PBI.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $9.86, MFI: 68.2, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>ADP</strong> <span class="tag" style="background: #d4edda; color: #155724;">Near Buy</span> <a href="history/stocks/ADP.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $255.30, RSI: 41.6, MFI: 30.1, Market: Bear</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>HST</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/HST.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $17.63, RSI: 57.3, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>SLB</strong> <span class="tag" style="background: #d4edda; color: #155724;">Near Buy</span> <a href="history/stocks/SLB.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $36.24, StochRSI: 0.37, Market: Bear</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>KMI</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/KMI.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $27.32, RSI: 57.8, StochRSI: 0.76, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>LOW</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/LOW.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $242.48, RSI: 57.7, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>TJX</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/TJX.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $151.92, RSI: 65.2, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>STT</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/STT.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $119.02, RSI: 58.8, MFI: 70.1, StochRSI: 0.76, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>BUD</strong> <span class="tag" style="background: #d4edda; color: #155724;">Near Buy</span> <a href="history/stocks/BUD.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $61.53, MFI: 24.4, Market: Bear</span>
+</div></div>
+<h3>3d Timeframe</h3>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>LUV</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/LUV.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $34.81, RSI: 59.5, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>AEE</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/AEE.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $106.35, RSI: 60.8, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>IVZ</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/IVZ.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $24.45, RSI: 64.2, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>BXP</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/BXP.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $72.36, StochRSI: 0.70, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>UAL</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/UAL.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $101.96, RSI: 57.7, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>CLX</strong> <span class="tag" style="background: #d4edda; color: #155724;">Near Buy</span> <a href="history/stocks/CLX.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $107.94, RSI: 40.9, MFI: 25.2, Market: Bear</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>QCOM</strong> <span class="tag" style="background: #d4edda; color: #155724;">Near Buy</span> <a href="history/stocks/QCOM.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $168.09, StochRSI: 0.28, Market: Bear</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>LIN</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/LIN.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $410.32, StochRSI: 0.62, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>HCA</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/HCA.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $508.29, StochRSI: 0.69, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>HUM</strong> <span class="tag" style="background: #d4edda; color: #155724;">Near Buy</span> <a href="history/stocks/HUM.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $245.77, RSI: 44.2, MFI: 30.5, Market: Bear</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>GILD</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/GILD.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $125.84, RSI: 61.8, MFI: 72.4, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>PYPL</strong> <span class="tag" style="background: #d4edda; color: #155724;">Near Buy</span> <a href="history/stocks/PYPL.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $62.69, RSI: 41.9, StochRSI: 0.27, Market: Bear</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>IBM</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/IBM.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $308.58, RSI: 62.6, MFI: 66.9, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>CSCO</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/CSCO.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $76.94, RSI: 66.5, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>STX</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/STX.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $276.69, RSI: 62.2, MFI: 71.8, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>WYNN</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/WYNN.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $128.68, RSI: 59.9, MFI: 68.2, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>VLO</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/VLO.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $176.76, RSI: 60.1, MFI: 65.6, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>ATO</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/ATO.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $176.37, RSI: 59.4, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>WU</strong> <span class="tag" style="background: #d4edda; color: #155724;">Near Buy</span> <a href="history/stocks/WU.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $8.79, StochRSI: 0.38, Market: Bear</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>WRB</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/WRB.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $77.69, RSI: 61.7, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>SPGI</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/SPGI.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $498.83, MFI: 76.2, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>SPG</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/SPG.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $186.32, RSI: 61.1, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>LMT</strong> <span class="tag" style="background: #d4edda; color: #155724;">Near Buy</span> <a href="history/stocks/LMT.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $457.86, RSI: 41.3, MFI: 33.2, Market: Bear</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>D</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/D.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $62.77, RSI: 61.1, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>ELV</strong> <span class="tag" style="background: #d4edda; color: #155724;">Near Buy</span> <a href="history/stocks/ELV.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $338.26, MFI: 34.4, Market: Bear</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>XOM</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/XOM.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $115.92, RSI: 55.2, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>PLD</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/PLD.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $128.53, RSI: 66.6, StochRSI: 0.67, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>AMT</strong> <span class="tag" style="background: #d4edda; color: #155724;">Near Buy</span> <a href="history/stocks/AMT.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $181.27, RSI: 39.2, Market: Bear</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>NKE</strong> <span class="tag" style="background: #d4edda; color: #155724;">Near Buy</span> <a href="history/stocks/NKE.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $64.22, RSI: 43.7, Market: Bear</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>AXP</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/AXP.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $365.27, RSI: 61.7, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>ICE</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/ICE.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $157.30, MFI: 66.7, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>DLTR</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/DLTR.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $110.81, RSI: 63.3, MFI: 67.7, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>CHRW</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/CHRW.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $158.87, MFI: 68.9, StochRSI: 0.76, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>CB</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/CB.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $296.18, RSI: 64.5, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>NDAQ</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/NDAQ.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $90.92, RSI: 57.1, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>BK</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/BK.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $112.10, RSI: 64.2, StochRSI: 0.79, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>HSY</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/HSY.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $188.08, RSI: 60.4, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>SYK</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/SYK.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $371.18, StochRSI: 0.75, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>MCD</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/MCD.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $311.82, RSI: 57.4, MFI: 66.5, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>COST</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/COST.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $913.59, StochRSI: 0.72, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>HPQ</strong> <span class="tag" style="background: #d4edda; color: #155724;">Near Buy</span> <a href="history/stocks/HPQ.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $24.42, RSI: 42.2, MFI: 32.1, Market: Bear</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>XEL</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/XEL.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $82.11, RSI: 65.1, StochRSI: 0.62, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>NSC</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/NSC.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $292.09, RSI: 60.6, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>MET</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/MET.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $76.56, StochRSI: 0.67, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>GS</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/GS.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $826.04, RSI: 64.9, MFI: 69.2, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>PPL</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/PPL.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $36.90, StochRSI: 0.65, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>ROST</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/ROST.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $176.36, MFI: 67.5, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>NTRS</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/NTRS.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $131.34, RSI: 56.0, MFI: 73.0, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>PSA</strong> <span class="tag" style="background: #d4edda; color: #155724;">Near Buy</span> <a href="history/stocks/PSA.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $274.54, RSI: 41.8, MFI: 25.5, StochRSI: 0.30, Market: Bear</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>EQIX</strong> <span class="tag" style="background: #d4edda; color: #155724;">Near Buy</span> <a href="history/stocks/EQIX.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $753.31, RSI: 36.5, Market: Bear</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>CME</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/CME.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $281.46, RSI: 59.3, MFI: 67.9, StochRSI: 0.69, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>NEE</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/NEE.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $86.29, RSI: 62.8, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>BRK-B</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/BRK-B.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $513.81, RSI: 63.2, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>ORLY</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/ORLY.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $101.70, RSI: 55.7, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>HD</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/HD.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $356.92, StochRSI: 0.71, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>RTX</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/RTX.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $174.91, RSI: 58.4, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>META</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/META.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $647.95, StochRSI: 0.62, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>ZTS</strong> <span class="tag" style="background: #d4edda; color: #155724;">Near Buy</span> <a href="history/stocks/ZTS.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $128.18, RSI: 41.5, Market: Bear</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>HPE</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/HPE.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $21.87, MFI: 66.0, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>RF</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/RF.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $25.19, MFI: 67.4, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>CSX</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/CSX.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $35.36, StochRSI: 0.68, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>ALL</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/ALL.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $211.98, RSI: 59.3, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>MS</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/MS.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $169.66, RSI: 64.5, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>ARE</strong> <span class="tag" style="background: #d4edda; color: #155724;">Near Buy</span> <a href="history/stocks/ARE.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $53.67, RSI: 32.2, MFI: 28.6, StochRSI: 0.40, Market: Bear</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>ADI</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/ADI.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $265.34, RSI: 65.3, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>AMAT</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/AMAT.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $252.25, StochRSI: 0.77, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>GM</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/GM.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $73.52, MFI: 68.1, StochRSI: 0.69, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>GPN</strong> <span class="tag" style="background: #d4edda; color: #155724;">Near Buy</span> <a href="history/stocks/GPN.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $75.76, RSI: 41.7, Market: Bear</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>AEP</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/AEP.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $123.77, RSI: 66.8, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>CRM</strong> <span class="tag" style="background: #d4edda; color: #155724;">Near Buy</span> <a href="history/stocks/CRM.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $230.54, RSI: 40.1, Market: Bear</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>MU</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/MU.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $236.48, RSI: 64.8, MFI: 65.7, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>C</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/C.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $103.60, RSI: 63.1, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>MMC</strong> <span class="tag" style="background: #d4edda; color: #155724;">Near Buy</span> <a href="history/stocks/MMC.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $183.45, RSI: 39.6, Market: Bear</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>NTAP</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/NTAP.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $111.56, StochRSI: 0.69, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>SNPS</strong> <span class="tag" style="background: #d4edda; color: #155724;">Near Buy</span> <a href="history/stocks/SNPS.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $418.01, RSI: 42.2, MFI: 32.2, Market: Bear</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>KEY</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/KEY.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $18.38, RSI: 55.7, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>WDC</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/WDC.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $163.33, RSI: 65.7, MFI: 70.3, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>HLT</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/HLT.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $285.03, RSI: 64.5, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>BAC</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/BAC.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $53.65, RSI: 60.4, StochRSI: 0.72, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>JPM</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/JPM.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $313.08, RSI: 59.0, StochRSI: 0.73, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>EXC</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/EXC.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $47.12, RSI: 61.4, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>LNT</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/LNT.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $69.47, RSI: 64.7, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>INTC</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/INTC.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $40.56, RSI: 67.0, StochRSI: 0.65, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>GD</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/GD.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $341.63, RSI: 55.6, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>PEP</strong> <span class="tag" style="background: #d4edda; color: #155724;">Near Buy</span> <a href="history/stocks/PEP.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $148.74, MFI: 31.4, Market: Bear</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>KO</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/KO.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $73.12, RSI: 67.6, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>SRE</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/SRE.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $94.72, RSI: 66.6, StochRSI: 0.69, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>MDLZ</strong> <span class="tag" style="background: #d4edda; color: #155724;">Near Buy</span> <a href="history/stocks/MDLZ.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $57.57, RSI: 41.3, Market: Bear</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>MA</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/MA.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $550.53, StochRSI: 0.75, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>PFGC</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/PFGC.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $97.07, StochRSI: 0.73, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>ED</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/ED.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $100.36, StochRSI: 0.65, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>CPB</strong> <span class="tag" style="background: #d4edda; color: #155724;">Near Buy</span> <a href="history/stocks/CPB.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $30.48, StochRSI: 0.40, Market: Bear</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>KMB</strong> <span class="tag" style="background: #d4edda; color: #155724;">Near Buy</span> <a href="history/stocks/KMB.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $109.12, RSI: 39.8, Market: Bear</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>IPG</strong> <span class="tag" style="background: #d4edda; color: #155724;">Near Buy</span> <a href="history/stocks/IPG.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $24.57, RSI: 42.1, MFI: 20.0, Market: Bear</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>WFC</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/WFC.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $85.85, RSI: 56.9, StochRSI: 0.71, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>LRCX</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/LRCX.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $156.00, RSI: 60.9, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>PNC</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/PNC.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $190.72, MFI: 73.7, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>CNA</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/CNA.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $46.75, RSI: 59.3, MFI: 67.0, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>PSX</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/PSX.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $136.96, RSI: 56.9, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>MPC</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/MPC.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $193.73, RSI: 55.9, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>WY</strong> <span class="tag" style="background: #d4edda; color: #155724;">Near Buy</span> <a href="history/stocks/WY.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $22.21, RSI: 38.5, MFI: 31.6, Market: Bear</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>WMT</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/WMT.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $110.51, RSI: 66.1, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>MTB</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/MTB.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $188.72, MFI: 66.5, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>OMC</strong> <span class="tag" style="background: #d4edda; color: #155724;">Near Buy</span> <a href="history/stocks/OMC.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $71.62, RSI: 41.7, MFI: 27.3, Market: Bear</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>CHD</strong> <span class="tag" style="background: #d4edda; color: #155724;">Near Buy</span> <a href="history/stocks/CHD.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $85.16, RSI: 44.7, MFI: 26.5, Market: Bear</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>JNJ</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/JNJ.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $206.92, MFI: 66.2, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>FITB</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/FITB.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $43.46, MFI: 65.0, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>WPP</strong> <span class="tag" style="background: #d4edda; color: #155724;">Near Buy</span> <a href="history/stocks/WPP.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $20.07, RSI: 41.0, Market: Bear</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>USFD</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/USFD.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $78.67, RSI: 61.5, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>AVGO</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/AVGO.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $402.96, RSI: 69.2, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>ADBE</strong> <span class="tag" style="background: #d4edda; color: #155724;">Near Buy</span> <a href="history/stocks/ADBE.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $320.13, RSI: 40.1, StochRSI: 0.35, Market: Bear</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>AAPL</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/AAPL.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $278.85, MFI: 78.9, StochRSI: 0.68, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>DG</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/DG.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $109.49, RSI: 59.9, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>CMS</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/CMS.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $75.44, RSI: 61.2, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>CBRE</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/CBRE.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $161.83, RSI: 58.3, MFI: 69.4, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>DAL</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/DAL.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $64.10, RSI: 62.7, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>ROP</strong> <span class="tag" style="background: #d4edda; color: #155724;">Near Buy</span> <a href="history/stocks/ROP.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $446.22, RSI: 31.8, StochRSI: 0.32, Market: Bear</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>WM</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/WM.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $217.87, RSI: 55.9, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>CVS</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/CVS.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $80.36, RSI: 59.7, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>ADP</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/ADP.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $255.30, StochRSI: 0.68, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>CMG</strong> <span class="tag" style="background: #d4edda; color: #155724;">Near Buy</span> <a href="history/stocks/CMG.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $34.52, RSI: 43.8, Market: Bear</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>V</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/V.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $334.44, StochRSI: 0.65, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>SYF</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/SYF.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $77.36, RSI: 61.4, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>HST</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/HST.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $17.63, RSI: 57.7, MFI: 68.9, StochRSI: 0.68, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>KMI</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/KMI.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $27.32, RSI: 55.1, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>STT</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/STT.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $119.02, RSI: 58.9, StochRSI: 0.79, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>USB</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/USB.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $49.05, RSI: 59.0, MFI: 70.1, Market: Bull</span>
+</div></div>
+<h3>1wk Timeframe</h3>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>AEE</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/AEE.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $106.35, RSI: 65.2, MFI: 68.1, StochRSI: 0.70, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>CMA</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/CMA.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $80.38, MFI: 66.4, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>UAL</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/UAL.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $101.96, RSI: 58.2, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>PM</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/PM.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $157.48, StochRSI: 0.73, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>WEC</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/WEC.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $112.07, RSI: 59.3, MFI: 66.9, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>CLX</strong> <span class="tag" style="background: #d4edda; color: #155724;">Near Buy</span> <a href="history/stocks/CLX.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $107.94, RSI: 34.6, MFI: 26.9, StochRSI: 0.40, Market: Bear</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>EL</strong> <span class="tag" style="background: #d4edda; color: #155724;">Near Buy</span> <a href="history/stocks/EL.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $94.07, StochRSI: 0.33, Market: Bear</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>COP</strong> <span class="tag" style="background: #d4edda; color: #155724;">Near Buy</span> <a href="history/stocks/COP.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $88.69, StochRSI: 0.36, Market: Bear</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>HUM</strong> <span class="tag" style="background: #d4edda; color: #155724;">Near Buy</span> <a href="history/stocks/HUM.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $245.77, StochRSI: 0.22, Market: Bear</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>GILD</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/GILD.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $125.84, RSI: 66.1, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>PYPL</strong> <span class="tag" style="background: #d4edda; color: #155724;">Near Buy</span> <a href="history/stocks/PYPL.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $62.69, RSI: 40.8, StochRSI: 0.33, Market: Bear</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>STX</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/STX.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $276.69, RSI: 69.2, MFI: 69.7, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>WYNN</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/WYNN.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $128.68, RSI: 61.9, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>VLO</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/VLO.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $176.76, RSI: 63.6, MFI: 65.0, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>TROW</strong> <span class="tag" style="background: #d4edda; color: #155724;">Near Buy</span> <a href="history/stocks/TROW.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $102.38, StochRSI: 0.32, Market: Bear</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>ATO</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/ATO.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $176.37, RSI: 67.6, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>WRB</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/WRB.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $77.69, RSI: 62.1, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>SPG</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/SPG.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $186.32, RSI: 63.4, StochRSI: 0.68, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>AMZN</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/AMZN.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $233.22, RSI: 55.2, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>D</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/D.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $62.77, RSI: 62.6, StochRSI: 0.78, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>XOM</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/XOM.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $115.92, RSI: 55.9, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>ISRG</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/ISRG.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $573.48, RSI: 63.3, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>NKE</strong> <span class="tag" style="background: #d4edda; color: #155724;">Near Buy</span> <a href="history/stocks/NKE.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $64.22, RSI: 44.4, StochRSI: 0.26, Market: Bear</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>FANG</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/FANG.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $152.59, RSI: 57.0, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>AXP</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/AXP.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $365.27, RSI: 63.7, StochRSI: 0.74, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>ICE</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/ICE.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $157.30, StochRSI: 0.60, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>ACN</strong> <span class="tag" style="background: #d4edda; color: #155724;">Near Buy</span> <a href="history/stocks/ACN.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $250.00, RSI: 42.2, Market: Bear</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>TRV</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/TRV.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $292.86, RSI: 64.5, MFI: 68.3, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>CB</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/CB.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $296.18, RSI: 59.6, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>ABBV</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/ABBV.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $227.70, RSI: 61.3, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>CAT</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/CAT.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $575.76, MFI: 69.9, StochRSI: 0.70, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>EQR</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/EQR.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $61.75, StochRSI: 0.62, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>ESS</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/ESS.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $263.62, MFI: 71.3, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>NDAQ</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/NDAQ.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $90.92, RSI: 58.4, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>BK</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/BK.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $112.10, RSI: 67.6, MFI: 74.1, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>AMD</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/AMD.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $217.53, RSI: 59.6, MFI: 68.0, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>MCD</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/MCD.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $311.82, RSI: 57.0, StochRSI: 0.74, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>HPQ</strong> <span class="tag" style="background: #d4edda; color: #155724;">Near Buy</span> <a href="history/stocks/HPQ.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $24.42, RSI: 41.4, Market: Bear</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>XEL</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/XEL.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $82.11, StochRSI: 0.79, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>NSC</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/NSC.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $292.09, RSI: 63.6, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>PEG</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/PEG.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $83.52, StochRSI: 0.67, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>TPR</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/TPR.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $109.28, RSI: 58.0, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>GS</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/GS.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $826.04, RSI: 68.9, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>LDOS</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/LDOS.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $191.10, RSI: 61.4, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>AFL</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/AFL.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $110.31, RSI: 55.7, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>PPL</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/PPL.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $36.90, RSI: 58.3, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>NTRS</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/NTRS.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $131.34, RSI: 61.7, MFI: 72.3, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>CFG</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/CFG.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $54.10, RSI: 66.0, StochRSI: 0.67, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>TSLA</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/TSLA.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $430.17, RSI: 59.6, MFI: 69.7, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>CME</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/CME.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $281.46, RSI: 58.4, StochRSI: 0.71, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>NEE</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/NEE.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $86.29, RSI: 66.6, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>BRK-B</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/BRK-B.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $513.81, RSI: 59.0, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>ORLY</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/ORLY.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $101.70, RSI: 57.0, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>RTX</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/RTX.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $174.91, RSI: 66.2, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>TSN</strong> <span class="tag" style="background: #d4edda; color: #155724;">Near Buy</span> <a href="history/stocks/TSN.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $57.54, MFI: 34.5, Market: Bear</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>ZTS</strong> <span class="tag" style="background: #d4edda; color: #155724;">Near Buy</span> <a href="history/stocks/ZTS.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $128.18, RSI: 35.8, MFI: 25.8, Market: Bear</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>AMGN</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/AMGN.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $345.46, RSI: 68.5, MFI: 67.0, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>UNP</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/UNP.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $231.83, RSI: 55.6, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>CSX</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/CSX.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $35.36, RSI: 56.4, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>ALL</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/ALL.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $211.98, RSI: 58.5, StochRSI: 0.76, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>MS</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/MS.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $169.66, RSI: 68.3, MFI: 66.8, StochRSI: 0.68, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>ARE</strong> <span class="tag" style="background: #d4edda; color: #155724;">Near Buy</span> <a href="history/stocks/ARE.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $53.67, RSI: 30.6, Market: Bear</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>ADI</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/ADI.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $265.34, RSI: 63.6, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>BEN</strong> <span class="tag" style="background: #d4edda; color: #155724;">Near Buy</span> <a href="history/stocks/BEN.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $22.59, MFI: 31.3, StochRSI: 0.25, Market: Bear</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>GPN</strong> <span class="tag" style="background: #d4edda; color: #155724;">Near Buy</span> <a href="history/stocks/GPN.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $75.76, RSI: 41.5, StochRSI: 0.22, Market: Bear</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>AON</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/AON.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $353.92, StochRSI: 0.64, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>MU</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/MU.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $236.48, RSI: 70.0, MFI: 79.0, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>AES</strong> <span class="tag" style="background: #d4edda; color: #155724;">Near Buy</span> <a href="history/stocks/AES.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $14.06, StochRSI: 0.40, Market: Bear</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>AVB</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/AVB.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $181.94, StochRSI: 0.71, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>C</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/C.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $103.60, RSI: 66.2, MFI: 66.0, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>DUK</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/DUK.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $123.94, RSI: 58.9, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>COF</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/COF.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $219.07, RSI: 55.6, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>KEY</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/KEY.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $18.38, RSI: 56.0, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>HLT</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/HLT.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $285.03, RSI: 62.4, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>BAC</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/BAC.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $53.65, RSI: 62.7, MFI: 65.8, StochRSI: 0.68, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>JPM</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/JPM.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $313.08, RSI: 61.1, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>EXC</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/EXC.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $47.12, RSI: 64.9, StochRSI: 0.62, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>LNT</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/LNT.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $69.47, RSI: 68.7, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>GD</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/GD.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $341.63, RSI: 65.0, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>KO</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/KO.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $73.12, RSI: 66.4, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>SRE</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/SRE.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $94.72, MFI: 68.6, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>MDLZ</strong> <span class="tag" style="background: #d4edda; color: #155724;">Near Buy</span> <a href="history/stocks/MDLZ.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $57.57, RSI: 37.2, StochRSI: 0.21, Market: Bear</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>FCX</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/FCX.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $42.98, StochRSI: 0.68, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>GIS</strong> <span class="tag" style="background: #d4edda; color: #155724;">Near Buy</span> <a href="history/stocks/GIS.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $47.35, RSI: 38.3, Market: Bear</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>HRL</strong> <span class="tag" style="background: #d4edda; color: #155724;">Near Buy</span> <a href="history/stocks/HRL.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $23.21, RSI: 36.0, Market: Bear</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>CAG</strong> <span class="tag" style="background: #d4edda; color: #155724;">Near Buy</span> <a href="history/stocks/CAG.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $17.85, RSI: 38.0, Market: Bear</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>CPB</strong> <span class="tag" style="background: #d4edda; color: #155724;">Near Buy</span> <a href="history/stocks/CPB.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $30.48, RSI: 40.8, StochRSI: 0.31, Market: Bear</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>STZ</strong> <span class="tag" style="background: #d4edda; color: #155724;">Near Buy</span> <a href="history/stocks/STZ.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $136.38, RSI: 37.6, Market: Bear</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>IPG</strong> <span class="tag" style="background: #d4edda; color: #155724;">Near Buy</span> <a href="history/stocks/IPG.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $24.57, RSI: 44.9, MFI: 31.1, Market: Bear</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>WFC</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/WFC.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $85.85, RSI: 58.5, MFI: 68.9, StochRSI: 0.75, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>CINF</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/CINF.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $167.59, RSI: 65.7, MFI: 69.2, StochRSI: 0.77, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>LRCX</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/LRCX.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $156.00, RSI: 69.1, MFI: 70.5, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>PSX</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/PSX.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $136.96, RSI: 57.7, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>LB</strong> <span class="tag" style="background: #d4edda; color: #155724;">Near Buy</span> <a href="history/stocks/LB.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $56.95, StochRSI: 0.35, Market: Bear</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>MPC</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/MPC.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $193.73, RSI: 60.3, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>WMT</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/WMT.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $110.51, RSI: 65.0, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>OMC</strong> <span class="tag" style="background: #d4edda; color: #155724;">Near Buy</span> <a href="history/stocks/OMC.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $71.62, RSI: 43.0, MFI: 34.9, Market: Bear</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>GE</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/GE.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $298.45, RSI: 62.1, MFI: 66.8, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>TGT</strong> <span class="tag" style="background: #d4edda; color: #155724;">Near Buy</span> <a href="history/stocks/TGT.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $90.62, RSI: 44.3, Market: Bear</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>JNJ</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/JNJ.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $206.92, MFI: 67.4, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>WPP</strong> <span class="tag" style="background: #d4edda; color: #155724;">Near Buy</span> <a href="history/stocks/WPP.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $20.07, RSI: 31.8, Market: Bear</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>CCI</strong> <span class="tag" style="background: #d4edda; color: #155724;">Near Buy</span> <a href="history/stocks/CCI.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $91.28, RSI: 42.0, StochRSI: 0.34, Market: Bear</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>USFD</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/USFD.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $78.67, RSI: 57.5, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>HIG</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/HIG.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $137.03, RSI: 64.7, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>MDT</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/MDT.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $105.33, MFI: 68.6, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>BTI</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/BTI.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $58.66, StochRSI: 0.73, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>ADBE</strong> <span class="tag" style="background: #d4edda; color: #155724;">Near Buy</span> <a href="history/stocks/ADBE.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $320.13, RSI: 36.1, Market: Bear</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>DG</strong> <span class="tag" style="background: #d4edda; color: #155724;">Near Buy</span> <a href="history/stocks/DG.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $109.49, MFI: 32.2, Market: Bear</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>CMS</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/CMS.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $75.44, RSI: 66.0, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>CBRE</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/CBRE.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $161.83, RSI: 60.4, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>DAL</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/DAL.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $64.10, RSI: 63.8, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>DXC</strong> <span class="tag" style="background: #d4edda; color: #155724;">Near Buy</span> <a href="history/stocks/DXC.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $13.20, RSI: 43.1, MFI: 33.6, Market: Bear</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>PRU</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/PRU.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $108.25, RSI: 58.0, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>KDP</strong> <span class="tag" style="background: #d4edda; color: #155724;">Near Buy</span> <a href="history/stocks/KDP.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $27.90, RSI: 43.5, Market: Bear</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>TAP</strong> <span class="tag" style="background: #d4edda; color: #155724;">Near Buy</span> <a href="history/stocks/TAP.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $46.51, RSI: 43.9, Market: Bear</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>CVS</strong> <span class="tag" style="background: #d4edda; color: #155724;">Near Buy</span> <a href="history/stocks/CVS.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $80.36, StochRSI: 0.31, Market: Bear</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>MAR</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/MAR.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $304.79, RSI: 64.6, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>CMG</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/CMG.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $34.52, StochRSI: 0.68, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>SYF</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/SYF.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $77.36, RSI: 63.7, StochRSI: 0.72, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>KMI</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/KMI.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $27.32, StochRSI: 0.64, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>STT</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/STT.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $119.02, RSI: 63.8, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>USB</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/USB.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $49.05, RSI: 58.5, StochRSI: 0.62, Market: Bull</span>
+</div></div>
+<h3>2wk Timeframe</h3>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>UAL</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/UAL.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $101.96, RSI: 59.0, StochRSI: 0.64, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>PM</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/PM.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $157.48, RSI: 55.6, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>WEC</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/WEC.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $112.07, RSI: 66.7, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>CLX</strong> <span class="tag" style="background: #d4edda; color: #155724;">Near Buy</span> <a href="history/stocks/CLX.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $107.94, RSI: 33.6, Market: Bear</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>QCOM</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/QCOM.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $168.09, RSI: 55.0, MFI: 68.5, StochRSI: 0.75, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>ANET</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/ANET.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $130.68, RSI: 57.1, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>SO</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/SO.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $91.12, RSI: 55.7, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>GILD</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/GILD.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $125.84, RSI: 67.9, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>PYPL</strong> <span class="tag" style="background: #d4edda; color: #155724;">Near Buy</span> <a href="history/stocks/PYPL.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $62.69, RSI: 42.0, Market: Bear</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>IBM</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/IBM.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $308.58, RSI: 67.3, MFI: 67.2, StochRSI: 0.65, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>NCLH</strong> <span class="tag" style="background: #d4edda; color: #155724;">Near Buy</span> <a href="history/stocks/NCLH.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $18.46, RSI: 42.4, Market: Bear</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>WRB</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/WRB.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $77.69, RSI: 68.9, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>SPG</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/SPG.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $186.32, RSI: 62.9, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>NVDA</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/NVDA.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $177.00, RSI: 64.3, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>AMZN</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/AMZN.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $233.22, RSI: 57.4, MFI: 66.8, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>XOM</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/XOM.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $115.92, RSI: 55.9, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>ISRG</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/ISRG.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $573.48, RSI: 61.1, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>PLD</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/PLD.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $128.53, RSI: 64.9, MFI: 65.7, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>NKE</strong> <span class="tag" style="background: #d4edda; color: #155724;">Near Buy</span> <a href="history/stocks/NKE.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $64.22, RSI: 44.4, StochRSI: 0.40, Market: Bear</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>AXP</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/AXP.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $365.27, RSI: 64.2, StochRSI: 0.69, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>TRV</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/TRV.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $292.86, RSI: 69.5, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>CB</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/CB.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $296.18, RSI: 62.1, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>ABBV</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/ABBV.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $227.70, RSI: 64.0, MFI: 74.7, StochRSI: 0.62, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>NDAQ</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/NDAQ.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $90.92, RSI: 62.4, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>HSY</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/HSY.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $188.08, RSI: 56.4, MFI: 67.2, StochRSI: 0.78, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>AMD</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/AMD.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $217.53, RSI: 63.4, MFI: 77.1, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>MCD</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/MCD.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $311.82, RSI: 57.8, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>FDX</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/FDX.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $275.68, RSI: 62.6, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>WMB</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/WMB.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $60.93, RSI: 59.1, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>NSC</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/NSC.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $292.09, RSI: 65.1, MFI: 73.0, StochRSI: 0.61, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>PEG</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/PEG.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $83.52, RSI: 55.2, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>SCHW</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/SCHW.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $92.73, RSI: 60.1, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>TPR</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/TPR.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $109.28, RSI: 67.5, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>LDOS</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/LDOS.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $191.10, RSI: 65.4, MFI: 67.4, StochRSI: 0.66, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>OKE</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/OKE.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $72.82, StochRSI: 0.75, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>AFL</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/AFL.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $110.31, RSI: 57.9, StochRSI: 0.72, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>PPL</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/PPL.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $36.90, RSI: 64.8, MFI: 66.7, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>ROST</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/ROST.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $176.36, RSI: 69.7, MFI: 69.6, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>NTRS</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/NTRS.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $131.34, RSI: 64.7, MFI: 68.7, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>TSLA</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/TSLA.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $430.17, RSI: 61.1, MFI: 70.3, StochRSI: 0.66, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>MSFT</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/MSFT.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $492.01, RSI: 56.9, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>KR</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/KR.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $67.28, RSI: 55.8, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>CME</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/CME.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $281.46, RSI: 67.7, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>NEE</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/NEE.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $86.29, RSI: 66.3, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>DHR</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/DHR.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $226.78, RSI: 55.6, MFI: 73.3, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>BRK-B</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/BRK-B.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $513.81, RSI: 62.3, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>ORLY</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/ORLY.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $101.70, RSI: 63.1, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>AMGN</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/AMGN.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $345.46, RSI: 68.7, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>O</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/O.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $57.61, RSI: 55.1, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>RF</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/RF.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $25.19, RSI: 56.9, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>CSX</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/CSX.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $35.36, RSI: 56.9, MFI: 69.1, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>ALL</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/ALL.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $211.98, RSI: 59.1, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>ARE</strong> <span class="tag" style="background: #d4edda; color: #155724;">Near Buy</span> <a href="history/stocks/ARE.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $53.67, RSI: 31.0, Market: Bear</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>AZO</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/AZO.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $3,954.33, RSI: 57.8, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>BEN</strong> <span class="tag" style="background: #d4edda; color: #155724;">Near Buy</span> <a href="history/stocks/BEN.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $22.59, StochRSI: 0.24, Market: Bear</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>AMAT</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/AMAT.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $252.25, MFI: 69.4, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>GPN</strong> <span class="tag" style="background: #d4edda; color: #155724;">Near Buy</span> <a href="history/stocks/GPN.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $75.76, RSI: 40.1, StochRSI: 0.38, Market: Bear</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>MNST</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/MNST.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $74.99, MFI: 65.2, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>C</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/C.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $103.60, RSI: 67.6, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>NTAP</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/NTAP.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $111.56, MFI: 73.1, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>DUK</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/DUK.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $123.94, RSI: 66.6, MFI: 65.9, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>COF</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/COF.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $219.07, RSI: 58.5, MFI: 72.1, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>JBHT</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/JBHT.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $173.96, RSI: 60.8, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>KEY</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/KEY.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $18.38, RSI: 57.4, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>WDC</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/WDC.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $163.33, StochRSI: 0.61, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>NOC</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/NOC.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $569.94, RSI: 57.4, MFI: 69.6, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>HLT</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/HLT.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $285.03, RSI: 65.0, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>BAC</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/BAC.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $53.65, RSI: 63.7, StochRSI: 0.69, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>JPM</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/JPM.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $313.08, RSI: 65.7, MFI: 69.0, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>EXC</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/EXC.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $47.12, RSI: 66.6, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>GD</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/GD.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $341.63, StochRSI: 0.69, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>PEP</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/PEP.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $148.74, MFI: 73.1, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>SYY</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/SYY.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $76.20, MFI: 66.7, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>KO</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/KO.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $73.12, RSI: 63.9, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>FCX</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/FCX.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $42.98, StochRSI: 0.69, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>GIS</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/GIS.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $47.35, StochRSI: 0.62, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>CVX</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/CVX.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $151.13, MFI: 76.4, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>PFGC</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/PFGC.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $97.07, RSI: 58.0, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>CAG</strong> <span class="tag" style="background: #d4edda; color: #155724;">Near Buy</span> <a href="history/stocks/CAG.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $17.85, RSI: 30.4, Market: Bear</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>CPB</strong> <span class="tag" style="background: #d4edda; color: #155724;">Near Buy</span> <a href="history/stocks/CPB.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $30.48, RSI: 35.8, Market: Bear</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>STZ</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/STZ.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $136.38, StochRSI: 0.75, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>WFC</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/WFC.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $85.85, RSI: 61.1, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>LRCX</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/LRCX.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $156.00, StochRSI: 0.63, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>PSX</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/PSX.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $136.96, RSI: 57.6, StochRSI: 0.77, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>LB</strong> <span class="tag" style="background: #d4edda; color: #155724;">Near Buy</span> <a href="history/stocks/LB.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $56.95, StochRSI: 0.25, Market: Bear</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>MPC</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/MPC.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $193.73, RSI: 61.2, MFI: 70.4, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>BF-B</strong> <span class="tag" style="background: #d4edda; color: #155724;">Near Buy</span> <a href="history/stocks/BF-B.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $28.98, RSI: 41.8, Market: Bear</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>WMT</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/WMT.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $110.51, RSI: 68.1, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>MTB</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/MTB.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $188.72, MFI: 65.7, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>ABT</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/ABT.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $128.90, MFI: 65.9, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>ALK</strong> <span class="tag" style="background: #d4edda; color: #155724;">Near Buy</span> <a href="history/stocks/ALK.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $42.86, RSI: 43.2, Market: Bear</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>TGT</strong> <span class="tag" style="background: #d4edda; color: #155724;">Near Buy</span> <a href="history/stocks/TGT.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $90.62, RSI: 40.2, Market: Bear</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>FITB</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/FITB.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $43.46, RSI: 56.4, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>CCI</strong> <span class="tag" style="background: #d4edda; color: #155724;">Near Buy</span> <a href="history/stocks/CCI.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $91.28, RSI: 43.6, Market: Bear</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>USFD</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/USFD.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $78.67, RSI: 61.0, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>FIS</strong> <span class="tag" style="background: #d4edda; color: #155724;">Near Buy</span> <a href="history/stocks/FIS.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $65.77, RSI: 40.4, StochRSI: 0.23, Market: Bear</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>HIG</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/HIG.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $137.03, RSI: 67.4, StochRSI: 0.78, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>BTI</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/BTI.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $58.66, MFI: 67.0, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>AVGO</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/AVGO.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $402.96, MFI: 78.9, StochRSI: 0.67, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>CMS</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/CMS.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $75.44, RSI: 66.3, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>ORCL</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/ORCL.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $201.95, MFI: 68.3, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>CBRE</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/CBRE.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $161.83, RSI: 61.9, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>DAL</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/DAL.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $64.10, RSI: 60.7, MFI: 66.8, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>DXC</strong> <span class="tag" style="background: #d4edda; color: #155724;">Near Buy</span> <a href="history/stocks/DXC.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $13.20, RSI: 40.3, Market: Bear</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>MAR</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/MAR.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $304.79, RSI: 66.1, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>SYF</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/SYF.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $77.36, RSI: 64.8, MFI: 65.3, StochRSI: 0.63, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>HST</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/HST.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $17.63, RSI: 58.7, MFI: 77.4, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>MKC</strong> <span class="tag" style="background: #d4edda; color: #155724;">Near Buy</span> <a href="history/stocks/MKC.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $67.48, RSI: 43.8, Market: Bear</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>KMI</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/KMI.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $27.32, RSI: 57.2, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>TJX</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/TJX.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $151.92, MFI: 66.1, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>BLK</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/BLK.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $1,047.30, MFI: 65.9, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>STT</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/STT.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $119.02, RSI: 67.0, MFI: 75.8, StochRSI: 0.61, Market: Bull</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #28a745; padding-left: 15px;">
+<div class="signal-info">
+<strong>BUD</strong> <span class="tag" style="background: #d4edda; color: #155724;">Near Buy</span> <a href="history/stocks/BUD.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $61.53, StochRSI: 0.26, Market: Bear</span>
+</div></div>
+<div class="signal-row" style="border-left: 5px solid #dc3545; padding-left: 15px;">
+<div class="signal-info">
+<strong>USB</strong> <span class="tag" style="background: #f8d7da; color: #721c24;">Near Sell</span> <a href="history/stocks/USB.html" class="history-link" target="_blank">View History ↗</a><br>
+<span class="meta">Price: $49.05, RSI: 58.2, Market: Bull</span>
+</div></div>
+
+    <div style="margin-top: 40px; text-align: center; color: #999; font-size: 0.8em;">
+        Generated by Crypto Signal Station
+    </div>
+</div>
+</body>
+</html>
