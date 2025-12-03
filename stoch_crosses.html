@@ -30,23 +30,47 @@
         .meta { color: #999; font-size: 0.9em; display: block; margin-top: 5px; }
         .history-link { font-size: 0.9em; margin-left: 10px; color: #007bff; text-decoration: none; white-space: nowrap; }
         .history-link:hover { text-decoration: underline; }
-        .nav-bar { margin-bottom: 20px; padding-bottom: 10px; border-bottom: 1px solid #eee; display: flex; gap: 20px; }
+        
+        /* Nav Bar */
+        .nav-bar { margin-bottom: 20px; padding-bottom: 10px; border-bottom: 1px solid #eee; display: flex; gap: 20px; align-items: center; flex-wrap: wrap; }
         .nav-link { text-decoration: none; color: #2c3e50; font-weight: bold; font-size: 1.1em; padding: 5px 0; }
         .nav-link:hover { color: #007bff; }
         .nav-link.active { color: #007bff; border-bottom: 2px solid #007bff; }
+        .nav-toggle { display: none; font-size: 1.5em; cursor: pointer; padding: 5px; }
+        
+        @media (max-width: 768px) {
+            .nav-bar { flex-direction: column; align-items: flex-start; gap: 5px; }
+            .nav-link { display: none; width: 100%; padding: 10px 0; border-bottom: 1px solid #eee; }
+            .nav-toggle { display: block; }
+            .nav-bar.responsive .nav-link { display: block; }
+        }
+
         /* Grid for History Index */
         .asset-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 10px; margin-top: 10px; }
         .asset-link { display: block; padding: 10px; background: #fff; border: 1px solid #ddd; border-radius: 4px; text-align: center; text-decoration: none; color: #2c3e50; font-weight: bold; transition: all 0.2s; }
         .asset-link:hover { background: #007bff; color: white; border-color: #007bff; transform: translateY(-2px); box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        .asset-bull { background-color: #d4edda; color: #155724; border-color: #c3e6cb; }
-        .asset-bull:hover { background-color: #c3e6cb; color: #155724; }
-        .asset-bear { background-color: #f8d7da; color: #721c24; border-color: #f5c6cb; }
-        .asset-bear:hover { background-color: #f5c6cb; color: #721c24; }
+        
+        /* Swapped Colors: Bull=Red, Bear=Green */
+        .asset-bull { background-color: #f8d7da; color: #721c24; border-color: #f5c6cb; } /* Red */
+        .asset-bull:hover { background-color: #f5c6cb; color: #721c24; }
+        .asset-bear { background-color: #d4edda; color: #155724; border-color: #c3e6cb; } /* Green */
+        .asset-bear:hover { background-color: #c3e6cb; color: #155724; }
     </style>
+    <script>
+    function toggleNav() {
+        var x = document.getElementById("myTopnav");
+        if (x.className.includes("responsive")) {
+            x.className = "nav-bar";
+        } else {
+            x.className += " responsive";
+        }
+    }
+    </script>
 </head>
 <body>
 <div class="container">
-    <div class="nav-bar">
+    <div class="nav-bar" id="myTopnav">
+        <span class="nav-toggle" onclick="toggleNav()">☰ Menu</span>
         <a href="index.html" class="nav-link">Home</a>
         <a href="history.html" class="nav-link">History</a>
         <a href="analysis.html" class="nav-link">Analysis</a>
@@ -59,369 +83,11 @@
 <p><i>Golden & Death crosses on the weekly StochRSI</i></p>
 <h2>CRYPTO</h2>
 <h3>Golden Cross</h3>
-<div class="signal-row" style="padding-left: 15px;">
-<div class="signal-info">
-<strong>DOGE-USD</strong> <br>
-<span class="meta">Price: $0.15, K: 0.01, D: 0.00</span>
-</div></div>
-<div class="signal-row" style="padding-left: 15px;">
-<div class="signal-info">
-<strong>XLM-USD</strong> <br>
-<span class="meta">Price: $0.25, K: 0.01, D: 0.00</span>
-</div></div>
-<div class="signal-row" style="padding-left: 15px;">
-<div class="signal-info">
-<strong>BTC-USD</strong> <br>
-<span class="meta">Price: $90,394.31, K: 0.04, D: 0.02</span>
-</div></div>
-<div class="signal-row" style="padding-left: 15px;">
-<div class="signal-info">
-<strong>XRP-USD</strong> <br>
-<span class="meta">Price: $2.16, K: 0.05, D: 0.03</span>
-</div></div>
-<div class="signal-row" style="padding-left: 15px;">
-<div class="signal-info">
-<strong>ADA-USD</strong> <br>
-<span class="meta">Price: $0.42, K: 0.01, D: 0.00</span>
-</div></div>
-<div class="signal-row" style="padding-left: 15px;">
-<div class="signal-info">
-<strong>SOL-USD</strong> <br>
-<span class="meta">Price: $133.56, K: 0.01, D: 0.00</span>
-</div></div>
-<div class="signal-row" style="padding-left: 15px;">
-<div class="signal-info">
-<strong>ETH-USD</strong> <br>
-<span class="meta">Price: $2,992.11, K: 0.03, D: 0.01</span>
-</div></div>
 <h2>STOCKS</h2>
+<h3>Confirmed Golden Cross</h3>
 <h3>Golden Cross</h3>
-<div class="signal-row" style="padding-left: 15px;">
-<div class="signal-info">
-<strong>CMA</strong> <br>
-<span class="meta">Price: $80.38, K: 0.70, D: 0.69</span>
-</div></div>
-<div class="signal-row" style="padding-left: 15px;">
-<div class="signal-info">
-<strong>IVZ</strong> <br>
-<span class="meta">Price: $24.45, K: 0.22, D: 0.20</span>
-</div></div>
-<div class="signal-row" style="padding-left: 15px;">
-<div class="signal-info">
-<strong>UAL</strong> <br>
-<span class="meta">Price: $101.96, K: 0.18, D: 0.12</span>
-</div></div>
-<div class="signal-row" style="padding-left: 15px;">
-<div class="signal-info">
-<strong>MCO</strong> <br>
-<span class="meta">Price: $490.78, K: 0.32, D: 0.28</span>
-</div></div>
-<div class="signal-row" style="padding-left: 15px;">
-<div class="signal-info">
-<strong>CLX</strong> <br>
-<span class="meta">Price: $107.94, K: 0.14, D: 0.06</span>
-</div></div>
-<div class="signal-row" style="padding-left: 15px;">
-<div class="signal-info">
-<strong>EL</strong> <br>
-<span class="meta">Price: $94.07, K: 0.15, D: 0.13</span>
-</div></div>
-<div class="signal-row" style="padding-left: 15px;">
-<div class="signal-info">
-<strong>FISV</strong> <br>
-<span class="meta">Price: $61.47, K: 0.01, D: 0.00</span>
-</div></div>
-<div class="signal-row" style="padding-left: 15px;">
-<div class="signal-info">
-<strong>PG</strong> <br>
-<span class="meta">Price: $148.16, K: 0.31, D: 0.22</span>
-</div></div>
-<div class="signal-row" style="padding-left: 15px;">
-<div class="signal-info">
-<strong>HUM</strong> <br>
-<span class="meta">Price: $245.77, K: 0.07, D: 0.06</span>
-</div></div>
-<div class="signal-row" style="padding-left: 15px;">
-<div class="signal-info">
-<strong>SO</strong> <br>
-<span class="meta">Price: $91.12, K: 0.07, D: 0.02</span>
-</div></div>
-<div class="signal-row" style="padding-left: 15px;">
-<div class="signal-info">
-<strong>BKNG</strong> <br>
-<span class="meta">Price: $4,914.69, K: 0.13, D: 0.09</span>
-</div></div>
-<div class="signal-row" style="padding-left: 15px;">
-<div class="signal-info">
-<strong>WYNN</strong> <br>
-<span class="meta">Price: $128.68, K: 0.11, D: 0.10</span>
-</div></div>
-<div class="signal-row" style="padding-left: 15px;">
-<div class="signal-info">
-<strong>TROW</strong> <br>
-<span class="meta">Price: $102.38, K: 0.11, D: 0.08</span>
-</div></div>
-<div class="signal-row" style="padding-left: 15px;">
-<div class="signal-info">
-<strong>NCLH</strong> <br>
-<span class="meta">Price: $18.46, K: 0.01, D: 0.00</span>
-</div></div>
-<div class="signal-row" style="padding-left: 15px;">
-<div class="signal-info">
-<strong>ELV</strong> <br>
-<span class="meta">Price: $338.26, K: 0.57, D: 0.52</span>
-</div></div>
-<div class="signal-row" style="padding-left: 15px;">
-<div class="signal-info">
-<strong>NFLX</strong> <br>
-<span class="meta">Price: $107.58, K: 0.10, D: 0.08</span>
-</div></div>
-<div class="signal-row" style="padding-left: 15px;">
-<div class="signal-info">
-<strong>ACN</strong> <br>
-<span class="meta">Price: $250.00, K: 0.90, D: 0.89</span>
-</div></div>
-<div class="signal-row" style="padding-left: 15px;">
-<div class="signal-info">
-<strong>GOOG</strong> <br>
-<span class="meta">Price: $320.12, K: 0.83, D: 0.77</span>
-</div></div>
-<div class="signal-row" style="padding-left: 15px;">
-<div class="signal-info">
-<strong>COST</strong> <br>
-<span class="meta">Price: $913.59, K: 0.24, D: 0.22</span>
-</div></div>
-<div class="signal-row" style="padding-left: 15px;">
-<div class="signal-info">
-<strong>GS</strong> <br>
-<span class="meta">Price: $826.04, K: 0.32, D: 0.30</span>
-</div></div>
-<div class="signal-row" style="padding-left: 15px;">
-<div class="signal-info">
-<strong>PPL</strong> <br>
-<span class="meta">Price: $36.90, K: 0.23, D: 0.17</span>
-</div></div>
-<div class="signal-row" style="padding-left: 15px;">
-<div class="signal-info">
-<strong>PSA</strong> <br>
-<span class="meta">Price: $274.54, K: 0.05, D: 0.04</span>
-</div></div>
-<div class="signal-row" style="padding-left: 15px;">
-<div class="signal-info">
-<strong>MSFT</strong> <br>
-<span class="meta">Price: $492.01, K: 0.17, D: 0.13</span>
-</div></div>
-<div class="signal-row" style="padding-left: 15px;">
-<div class="signal-info">
-<strong>HD</strong> <br>
-<span class="meta">Price: $356.92, K: 0.06, D: 0.03</span>
-</div></div>
-<div class="signal-row" style="padding-left: 15px;">
-<div class="signal-info">
-<strong>META</strong> <br>
-<span class="meta">Price: $647.95, K: 0.11, D: 0.04</span>
-</div></div>
-<div class="signal-row" style="padding-left: 15px;">
-<div class="signal-info">
-<strong>ZTS</strong> <br>
-<span class="meta">Price: $128.18, K: 0.19, D: 0.13</span>
-</div></div>
-<div class="signal-row" style="padding-left: 15px;">
-<div class="signal-info">
-<strong>O</strong> <br>
-<span class="meta">Price: $57.61, K: 0.07, D: 0.02</span>
-</div></div>
-<div class="signal-row" style="padding-left: 15px;">
-<div class="signal-info">
-<strong>ARE</strong> <br>
-<span class="meta">Price: $53.67, K: 0.04, D: 0.01</span>
-</div></div>
-<div class="signal-row" style="padding-left: 15px;">
-<div class="signal-info">
-<strong>ADI</strong> <br>
-<span class="meta">Price: $265.34, K: 0.49, D: 0.29</span>
-</div></div>
-<div class="signal-row" style="padding-left: 15px;">
-<div class="signal-info">
-<strong>BEN</strong> <br>
-<span class="meta">Price: $22.59, K: 0.08, D: 0.04</span>
-</div></div>
-<div class="signal-row" style="padding-left: 15px;">
-<div class="signal-info">
-<strong>GM</strong> <br>
-<span class="meta">Price: $73.52, K: 0.97, D: 0.97</span>
-</div></div>
-<div class="signal-row" style="padding-left: 15px;">
-<div class="signal-info">
-<strong>PVH</strong> <br>
-<span class="meta">Price: $84.76, K: 0.23, D: 0.13</span>
-</div></div>
-<div class="signal-row" style="padding-left: 15px;">
-<div class="signal-info">
-<strong>GPN</strong> <br>
-<span class="meta">Price: $75.76, K: 0.07, D: 0.02</span>
-</div></div>
-<div class="signal-row" style="padding-left: 15px;">
-<div class="signal-info">
-<strong>GOOGL</strong> <br>
-<span class="meta">Price: $320.18, K: 0.82, D: 0.76</span>
-</div></div>
-<div class="signal-row" style="padding-left: 15px;">
-<div class="signal-info">
-<strong>DUK</strong> <br>
-<span class="meta">Price: $123.94, K: 0.09, D: 0.04</span>
-</div></div>
-<div class="signal-row" style="padding-left: 15px;">
-<div class="signal-info">
-<strong>SNPS</strong> <br>
-<span class="meta">Price: $418.01, K: 0.07, D: 0.06</span>
-</div></div>
-<div class="signal-row" style="padding-left: 15px;">
-<div class="signal-info">
-<strong>NOC</strong> <br>
-<span class="meta">Price: $569.94, K: 0.08, D: 0.04</span>
-</div></div>
-<div class="signal-row" style="padding-left: 15px;">
-<div class="signal-info">
-<strong>EXC</strong> <br>
-<span class="meta">Price: $47.12, K: 0.45, D: 0.40</span>
-</div></div>
-<div class="signal-row" style="padding-left: 15px;">
-<div class="signal-info">
-<strong>PEP</strong> <br>
-<span class="meta">Price: $148.74, K: 0.33, D: 0.23</span>
-</div></div>
-<div class="signal-row" style="padding-left: 15px;">
-<div class="signal-info">
-<strong>ADSK</strong> <br>
-<span class="meta">Price: $303.34, K: 0.14, D: 0.07</span>
-</div></div>
-<div class="signal-row" style="padding-left: 15px;">
-<div class="signal-info">
-<strong>FCX</strong> <br>
-<span class="meta">Price: $42.98, K: 0.48, D: 0.43</span>
-</div></div>
-<div class="signal-row" style="padding-left: 15px;">
-<div class="signal-info">
-<strong>MA</strong> <br>
-<span class="meta">Price: $550.53, K: 0.07, D: 0.02</span>
-</div></div>
-<div class="signal-row" style="padding-left: 15px;">
-<div class="signal-info">
-<strong>KMB</strong> <br>
-<span class="meta">Price: $109.12, K: 0.16, D: 0.08</span>
-</div></div>
-<div class="signal-row" style="padding-left: 15px;">
-<div class="signal-info">
-<strong>IPG</strong> <br>
-<span class="meta">Price: $24.57, K: 0.13, D: 0.12</span>
-</div></div>
-<div class="signal-row" style="padding-left: 15px;">
-<div class="signal-info">
-<strong>WY</strong> <br>
-<span class="meta">Price: $22.21, K: 0.07, D: 0.03</span>
-</div></div>
-<div class="signal-row" style="padding-left: 15px;">
-<div class="signal-info">
-<strong>TGT</strong> <br>
-<span class="meta">Price: $90.62, K: 0.70, D: 0.65</span>
-</div></div>
-<div class="signal-row" style="padding-left: 15px;">
-<div class="signal-info">
-<strong>ZION</strong> <br>
-<span class="meta">Price: $53.23, K: 0.31, D: 0.27</span>
-</div></div>
-<div class="signal-row" style="padding-left: 15px;">
-<div class="signal-info">
-<strong>CDNS</strong> <br>
-<span class="meta">Price: $311.84, K: 0.05, D: 0.04</span>
-</div></div>
-<div class="signal-row" style="padding-left: 15px;">
-<div class="signal-info">
-<strong>AVGO</strong> <br>
-<span class="meta">Price: $402.96, K: 0.20, D: 0.13</span>
-</div></div>
-<div class="signal-row" style="padding-left: 15px;">
-<div class="signal-info">
-<strong>AAPL</strong> <br>
-<span class="meta">Price: $278.85, K: 0.98, D: 0.96</span>
-</div></div>
-<div class="signal-row" style="padding-left: 15px;">
-<div class="signal-info">
-<strong>SHW</strong> <br>
-<span class="meta">Price: $343.69, K: 0.26, D: 0.24</span>
-</div></div>
-<div class="signal-row" style="padding-left: 15px;">
-<div class="signal-info">
-<strong>ORCL</strong> <br>
-<span class="meta">Price: $201.95, K: 0.01, D: 0.00</span>
-</div></div>
-<div class="signal-row" style="padding-left: 15px;">
-<div class="signal-info">
-<strong>CBRE</strong> <br>
-<span class="meta">Price: $161.83, K: 0.21, D: 0.10</span>
-</div></div>
-<div class="signal-row" style="padding-left: 15px;">
-<div class="signal-info">
-<strong>DAL</strong> <br>
-<span class="meta">Price: $64.10, K: 0.45, D: 0.28</span>
-</div></div>
-<div class="signal-row" style="padding-left: 15px;">
-<div class="signal-info">
-<strong>PBI</strong> <br>
-<span class="meta">Price: $9.86, K: 0.12, D: 0.06</span>
-</div></div>
-<div class="signal-row" style="padding-left: 15px;">
-<div class="signal-info">
-<strong>CMG</strong> <br>
-<span class="meta">Price: $34.52, K: 0.34, D: 0.17</span>
-</div></div>
-<div class="signal-row" style="padding-left: 15px;">
-<div class="signal-info">
-<strong>V</strong> <br>
-<span class="meta">Price: $334.44, K: 0.12, D: 0.06</span>
-</div></div>
-<div class="signal-row" style="padding-left: 15px;">
-<div class="signal-info">
-<strong>SYF</strong> <br>
-<span class="meta">Price: $77.36, K: 0.53, D: 0.46</span>
-</div></div>
-<div class="signal-row" style="padding-left: 15px;">
-<div class="signal-info">
-<strong>LOW</strong> <br>
-<span class="meta">Price: $242.48, K: 0.16, D: 0.10</span>
-</div></div>
-<div class="signal-row" style="padding-left: 15px;">
-<div class="signal-info">
-<strong>VRTX</strong> <br>
-<span class="meta">Price: $433.61, K: 0.92, D: 0.89</span>
-</div></div>
+<h3>Confirmed Death Cross</h3>
 <h3>Death Cross</h3>
-<div class="signal-row" style="padding-left: 15px;">
-<div class="signal-info">
-<strong>LIN</strong> <br>
-<span class="meta">Price: $410.32, K: 0.04, D: 0.05</span>
-</div></div>
-<div class="signal-row" style="padding-left: 15px;">
-<div class="signal-info">
-<strong>XOM</strong> <br>
-<span class="meta">Price: $115.92, K: 0.73, D: 0.81</span>
-</div></div>
-<div class="signal-row" style="padding-left: 15px;">
-<div class="signal-info">
-<strong>AFL</strong> <br>
-<span class="meta">Price: $110.31, K: 0.60, D: 0.76</span>
-</div></div>
-<div class="signal-row" style="padding-left: 15px;">
-<div class="signal-info">
-<strong>BMY</strong> <br>
-<span class="meta">Price: $49.20, K: 0.96, D: 0.97</span>
-</div></div>
-<div class="signal-row" style="padding-left: 15px;">
-<div class="signal-info">
-<strong>BUD</strong> <br>
-<span class="meta">Price: $61.53, K: 0.76, D: 0.87</span>
-</div></div>
 
     <div style="margin-top: 40px; text-align: center; color: #999; font-size: 0.8em;">
         Generated by Crypto Signal Station
