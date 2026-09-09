@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Market Signal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600;700&display=swap">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0a0c11; --surf:#12151d; --surf2:#1a1e29; --line:#232838;
+  --text:#e6eaf4; --dim:#7a86a3; --faint:#4c5670;
+  --accent:#f7931a;
+  --hot:#ef5f5f; --warm:#f0a830; --cool:#6f7d99; --good:#3ecf8e;
+  --mono:'JetBrains Mono',ui-monospace,monospace;
+  --disp:'Space Grotesk',system-ui,sans-serif;
+  --body:'Inter',system-ui,sans-serif;
+}
+body.re{--bg:#0d0f0c;--surf:#161a15;--surf2:#1e2319;--line:#282f24;
+  --text:#e8ece2;--dim:#78876f;--faint:#4d5a46;--accent:#c9a24f}
+html,body{height:100%}
+body{background:var(--bg);color:var(--text);font-family:var(--body);font-size:14px;
+  line-height:1.55;transition:background .25s}
+
+.tabs{display:flex;height:52px;background:#06080c;border-bottom:1px solid var(--line);
+  position:sticky;top:0;z-index:50;align-items:stretch}
+body.re .tabs{background:#080a07}
+.tab{display:flex;align-items:center;gap:8px;padding:0 22px;border:0;background:none;
+  cursor:pointer;font-family:var(--body);font-size:12px;font-weight:600;color:var(--faint);
+  letter-spacing:.08em;text-transform:uppercase;border-bottom:2px solid transparent;
+  transition:color .2s,border-color .2s}
+.tab:hover{color:var(--dim)}
+.tab[aria-selected="true"]{color:var(--accent);border-bottom-color:var(--accent)}
+.tab .dot{width:6px;height:6px;border-radius:50%;background:currentColor}
+.stamp{margin-left:auto;display:flex;align-items:center;padding:0 18px;font-family:var(--mono);
+  font-size:11px;color:var(--faint)}
+
+.page{max-width:1280px;margin:0 auto;padding:28px 24px 56px}
+[hidden]{display:none!important}
+
+.eyebrow{font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--faint);display:flex;align-items:center;gap:10px;margin:0 0 12px}
+.eyebrow::after{content:'';flex:1;height:1px;background:var(--line)}
+
+/* --- cycle verdict --- */
+.verdict{background:var(--surf);border:1px solid var(--line);border-radius:12px;
+  overflow:hidden;margin-bottom:30px}
+.verdict-top{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:0}
+.verdict-main{padding:26px 28px;border-right:1px solid var(--line)}
+.regime{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:10px;
+  font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);
+  background:color-mix(in srgb,var(--accent) 14%,transparent);padding:5px 10px;border-radius:5px}
+.phase{font-family:var(--disp);font-size:clamp(30px,4.6vw,46px);font-weight:700;
+  letter-spacing:-.02em;line-height:1.05;margin:16px 0 8px;text-wrap:balance}
+.phase-blurb{font-size:14px;color:var(--dim);max-width:46ch}
+.evidence{display:flex;flex-wrap:wrap;gap:7px;margin-top:20px}
+.eq{font-family:var(--mono);font-size:11px;color:var(--dim);background:var(--surf2);
+  border:1px solid var(--line);padding:4px 9px;border-radius:5px;white-space:nowrap}
+
+.verdict-side{padding:26px 28px;display:flex;flex-direction:column;gap:20px}
+.side-h{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--faint);margin-bottom:10px}
+.conf{display:flex;align-items:baseline;gap:9px;margin-bottom:6px}
+.conf b{font-family:var(--mono);font-size:30px;font-weight:700;color:var(--text);
+  font-variant-numeric:tabular-nums;line-height:1}
+.conf span{font-size:11px;color:var(--dim)}
+.pdist{display:flex;flex-direction:column;gap:8px}
+.prow{display:grid;grid-template-columns:104px 1fr 38px;align-items:center;gap:10px}
+.pname{font-size:11px;color:var(--dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ptrack{height:6px;background:var(--surf2);border-radius:3px;overflow:hidden}
+.pfill{height:100%;border-radius:3px;background:var(--accent);opacity:.55}
+.prow:first-child .pfill{opacity:1}
+.ppct{font-family:var(--mono);font-size:11px;color:var(--dim);text-align:right;
+  font-variant-numeric:tabular-nums}
+.bias{display:flex;height:7px;border-radius:4px;overflow:hidden;background:var(--surf2)}
+.bias i{display:block;height:100%}
+.bias-key{display:flex;flex-wrap:wrap;gap:12px;margin-top:9px}
+.bk{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--dim)}
+.bk i{width:7px;height:7px;border-radius:2px}
+.basis{font-size:11px;color:var(--faint);border-top:1px solid var(--line);padding-top:14px}
+.basis b{color:var(--dim);font-family:var(--mono);font-weight:600}
+
+/* --- watch list --- */
+.watch{display:grid;grid-template-columns:repeat(auto-fill,minmax(268px,1fr));gap:12px;
+  margin-bottom:30px}
+.w{background:var(--surf);border:1px solid var(--line);border-left:3px solid var(--cool);
+  border-radius:9px;padding:15px 16px;display:flex;flex-direction:column;gap:7px}
+.w[data-state="triggered"]{border-left-color:var(--hot)}
+.w[data-state="armed"]{border-left-color:var(--warm)}
+.w[data-state="clear"]{border-left-color:var(--good)}
+.w-top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+.w-name{font-size:13px;font-weight:600;color:var(--text)}
+.w-state{font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:.1em;
+  text-transform:uppercase;padding:3px 7px;border-radius:4px;white-space:nowrap;
+  background:color-mix(in srgb,var(--cool) 18%,transparent);color:var(--cool)}
+.w[data-state="triggered"] .w-state{background:color-mix(in srgb,var(--hot) 18%,transparent);color:var(--hot)}
+.w[data-state="armed"] .w-state{background:color-mix(in srgb,var(--warm) 18%,transparent);color:var(--warm)}
+.w[data-state="clear"] .w-state{background:color-mix(in srgb,var(--good) 16%,transparent);color:var(--good)}
+.w-val{font-family:var(--mono);font-size:15px;font-weight:600;color:var(--text);
+  font-variant-numeric:tabular-nums}
+.w-detail{font-size:12px;color:var(--dim);line-height:1.5}
+.w-freq{font-family:var(--mono);font-size:10px;color:var(--faint);margin-top:auto;padding-top:4px}
+
+/* --- tables --- */
+.card{background:var(--surf);border:1px solid var(--line);border-radius:10px;overflow:hidden;
+  margin-bottom:22px}
+.card-h{padding:13px 17px;border-bottom:1px solid var(--line);font-size:10px;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--faint);display:flex;
+  justify-content:space-between;align-items:center;gap:10px}
+.card-h em{font-style:normal;font-weight:400;letter-spacing:0;text-transform:none;font-size:11px}
+.scroll{overflow-x:auto}
+table{width:100%;border-collapse:collapse}
+th{font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);
+  padding:9px 12px;border-bottom:1px solid var(--line);text-align:left;white-space:nowrap}
+td{padding:10px 12px;border-bottom:1px solid color-mix(in srgb,var(--line) 55%,transparent);
+  font-variant-numeric:tabular-nums;white-space:nowrap}
+tr:last-child td{border-bottom:0}
+.r{text-align:right}
+.sym{font-family:var(--mono);font-size:12px;font-weight:700}
+.sub{font-size:11px;color:var(--faint)}
+.num{font-family:var(--mono);font-size:12px}
+.up{color:var(--good)}.dn{color:var(--hot)}.nt{color:var(--faint)}
+.freqbar{display:inline-block;height:4px;border-radius:2px;background:var(--accent);
+  vertical-align:middle;margin-right:6px}
+.chip{display:inline-block;font-family:var(--mono);font-size:10px;padding:2px 7px;border-radius:4px;
+  background:var(--surf2);color:var(--dim);margin:0 5px 5px 0}
+.foot{margin-top:32px;padding-top:16px;border-top:1px solid var(--line);font-size:11px;
+  color:var(--faint);line-height:1.7}
+.foot code{font-family:var(--mono);color:var(--dim)}
+@media (max-width:880px){
+  .verdict-top{grid-template-columns:1fr}
+  .verdict-main{border-right:0;border-bottom:1px solid var(--line)}
+}
+</style>
+</head>
+<body>
+<nav class="tabs" role="tablist">
+  <button class="tab" role="tab" aria-selected="true" data-tab="crypto"><span class="dot"></span>Crypto Crew</button>
+  <button class="tab" role="tab" aria-selected="false" data-tab="re"><span class="dot"></span>Nashville Real Estate</button>
+  <div class="stamp">Sep 09, 2026</div>
+</nav>
+<main id="root"></main>
+<script id="payload" type="application/json">{"generated_at": "2026-09-09T03:38:49.589164+00:00", "profile_built_at": "2026-09-09T03:34:27.180584+00:00", "crypto": {"cycle": {"regime": "parabolic", "regime_label": "Parabolic", "regime_blurb": "BTC up more than 20% in 30 days", "sample_size": 163, "phases": [{"phase": "mid_bull", "label": "Mid Bull", "share": 45, "blurb": "Trending. Sustained advance with healthy pullbacks being bought."}, {"phase": "early_bull", "label": "Early Bull", "share": 32, "blurb": "Turning up. First higher lows after a base; momentum reawakening."}, {"phase": "late_bull", "label": "Late Bull", "share": 16, "blurb": "Extending. Momentum stretched; gains steep but breadth narrowing."}, {"phase": "accumulation", "label": "Accumulation", "share": 4, "blurb": "Bottoming. Sellers exhausted, price basing under long-term averages."}], "primary": {"phase": "mid_bull", "label": "Mid Bull", "share": 45, "blurb": "Trending. Sustained advance with healthy pullbacks being bought."}, "confidence": 45, "bias": [{"name": "bullish", "share": 87}, {"name": "neutral", "share": 6}, {"name": "uncertain", "share": 4}, {"name": "bearish", "share": 3}], "evidence": ["BTC $78,457", "+21.0% over 30 days", "37% below trailing high", "RSI 60", "Fear & Greed 69 (Greed)", "BTC dominance 58.3%"], "themes": ["cycle top", "stochastic rsi", "bull run", "all time", "market cycle", "bull market", "short term", "moving average"], "indicators": ["rsi", "stochastic rsi", "nvt", "gaussian channel", "fear and greed index", "fibonacci retracement"]}, "watch": [{"name": "MACD cross", "detail": "Below signal \u2014 momentum has rolled over.", "current": "MACD 2,843 vs signal 3,238", "state": "triggered", "weight": 86}, {"name": "Stochastic RSI cross", "detail": "Oversold. A K-above-D cross is the buy trigger.", "current": "K 5.3 / D 8.3 \u2014 K below D", "state": "armed", "weight": 509}, {"name": "Fear & Greed", "detail": "Mid-range sentiment.", "current": "69 (Greed)", "state": "watching", "weight": 34}, {"name": "BTC dominance", "detail": "Elevated dominance \u2014 capital still concentrated in BTC.", "current": "58.33%", "state": "watching", "weight": 0}, {"name": "RSI (14)", "detail": "Between 40 and 70 \u2014 neutral range.", "current": "60.2", "state": "clear", "weight": 470}, {"name": "200-day moving average", "detail": "Price above the 200 MA \u2014 long-term trend intact.", "current": "$69,846 (+12.3%)", "state": "clear", "weight": 32}, {"name": "Hash Ribbons", "detail": "MA30 above MA60 \u2014 miners healthy, no forced selling.", "current": "Above 60Ma", "state": "clear", "weight": 29}], "coins": [{"sym": "BTC", "name": "Bitcoin", "price": 78457, "c24": -0.69763, "c30": 20.6, "mc": 1575.536846551, "rank": 1, "videos": 994, "vpct": 98}, {"sym": "ETH", "name": "Ethereum", "price": 2484.77, "c24": -0.02972, "c30": 29.4, "mc": 303.213686351, "rank": 2, "videos": 160, "vpct": 16}, {"sym": "XRP", "name": "XRP", "price": 1.42, "c24": 1.60811, "c30": 36.1, "mc": 88.882218191, "rank": 5, "videos": 72, "vpct": 7}, {"sym": "ADA", "name": "Cardano", "price": 0.219937, "c24": -0.05311, "c30": 11.3, "mc": 8.250189089, "rank": 19, "videos": 30, "vpct": 3}, {"sym": "LTC", "name": "Litecoin", "price": 54.33, "c24": -1.46527, "c30": 18.0, "mc": 4.217597221, "rank": 26, "videos": 18, "vpct": 2}, {"sym": "BNB", "name": "BNB", "price": 752.23, "c24": 1.77573, "c30": 24.0, "mc": 100.167410719, "rank": 4, "videos": 16, "vpct": 2}, {"sym": "SHIB", "name": "Shiba Inu", "price": 5.41e-06, "c24": -0.18736, "c30": 15.5, "mc": 3.189543415, "rank": 33, "videos": 15, "vpct": 1}, {"sym": "SOL", "name": "Solana", "price": 103.37, "c24": -0.33197, "c30": 33.7, "mc": 60.601481204, "rank": 7, "videos": 10, "vpct": 1}, {"sym": "LINK", "name": "Chainlink", "price": 12.53, "c24": -1.61726, "c30": 50.4, "mc": 9.373125909, "rank": 17, "videos": 10, "vpct": 1}, {"sym": "AVAX", "name": "Avalanche", "price": 8.01, "c24": -0.81317, "c30": 21.9, "mc": 3.457027147, "rank": 30, "videos": 1, "vpct": 0}, {"sym": "UNI", "name": "Uniswap", "price": 6.74, "c24": -2.05022, "c30": 66.5, "mc": 4.198612018, "rank": 27, "videos": 0, "vpct": 0}, {"sym": "EOS", "name": "EOS", "price": 0.080804, "c24": 0.67241, "c30": 24.1, "mc": 0.0, "rank": null, "videos": 0, "vpct": 0}], "metrics": {"price": 78456.96, "mom30": 20.970830239026277, "drawdown": 37.12209685335432, "rsi": 60.16, "stoch_k": 5.26, "stoch_d": 8.3, "macd": 2843.2711, "macd_signal": 3238.3155, "dominance": 58.334422565872366, "fear_greed": 69, "fear_greed_label": "Greed", "fg_series": [30, 29, 27, 29, 29, 34, 34, 31, 41, 46, 62, 72, 71, 66, 73, 74, 65, 71, 73, 68, 69, 62, 69, 63, 65, 74, 73, 73, 71, 69], "price_series": [63555.66181107698, 63532.27782485316, 64408.80975375945, 65709.31094599118, 66292.50117921834, 65619.28080038042, 64444.545329668814, 62897.23855524796, 63489.81094752525, 64253.39869532133, 63255.48525259375, 63937.28526422244, 62662.29201921944, 60989.57352152134, 59726.73653480851, 60022.32566638378, 59953.443344011124, 59494.606386317784, 60152.35872063589, 58566.091991843154, 59967.685041718134, 61490.21448471664, 62553.61289177051, 63088.406753852214, 63586.102141021256, 64001.23542391328, 63335.30929080668, 62247.1304822092, 63192.8789720319, 64110.97482196822, 63791.35305345348, 63746.65595793199, 62278.96301585648, 64983.51907427709, 64717.168891130066, 63792.28742743447, 63904.954014943025, 64795.70382303786, 64670.40117470696, 65184.92144270268, 66520.98164575922, 66077.05646514206, 65052.47667067735, 64092.64739795451, 64318.24520120312, 65343.824510845894, 63701.35288114535, 63881.94327943538, 63916.59794922001, 64743.33714554026, 62820.08613814001, 62772.57726413174, 63504.41559755184, 63465.19968911304, 64062.173729779366, 64608.705388357404, 64262.74830979173, 64879.7560855934, 64917.23929330571, 64856.097825382276, 63915.71213556821, 63537.55988964766, 63408.625697113624, 63429.17906286841, 62984.28959582886, 63031.04825975698, 62843.70368466329, 64491.345282946255, 64686.25782561655, 69291.0104297816, 73020.94563440893, 78317.77716345884, 77081.02299000922, 77712.3200924702, 78973.88693602335, 78511.2331116067, 79018.03405750773, 80268.37474707834, 77820.76428719184, 78225.13950818499, 77658.23133225394, 78552.77932895812, 77416.44110979848, 77297.13347191992, 81264.70153038795, 79671.25767420157, 79821.69873179746, 80329.3478460037, 79093.4641898418, 78456.95722321216], "total2": 1084889697305, "total3": 781676010954, "alts_beating_btc": null, "alts_tracked": null, "hashrate_ma30": 915406507.09, "hashrate_ma60": 909263022.73, "fib": {"swing_high": 82018.37, "swing_low": 58566.09, "fib_0": 82018.37, "fib_236": 76483.63, "fib_382": 73059.6, "fib_500": 70292.23, "fib_618": 67524.86, "fib_786": 63584.88, "fib_1": 58566.09}, "sma_200": 69845.51}}, "re": {"cycle": {"regime": "high_rate_flat", "regime_label": "High Rate Flat", "regime_blurb": "30yr mortgage above 6.5%, holding steady", "sample_size": 89, "phases": [{"phase": "early_recession", "label": "Early Recession", "share": 58, "blurb": "Softening. Supply exceeds demand; price cuts spreading, DOM rising."}, {"phase": "hyper_supply", "label": "Hyper Supply", "share": 16, "blurb": "Oversupplied. Inventory building faster than demand absorbs it."}, {"phase": "peak_expansion", "label": "Peak Expansion", "share": 11, "blurb": "Tightest. Demand outstripping supply; prices and velocity at highs."}, {"phase": "recession", "label": "Recession", "share": 8, "blurb": "Contracting. Broad price declines with demand still falling."}], "primary": {"phase": "early_recession", "label": "Early Recession", "share": 58, "blurb": "Softening. Supply exceeds demand; price cuts spreading, DOM rising."}, "confidence": 58, "bias": [{"name": "bearish", "share": 54}, {"name": "uncertain", "share": 24}, {"name": "neutral", "share": 19}, {"name": "bullish", "share": 3}], "evidence": ["30yr mortgage 6.71%", "+3.5% over 90 days", "Nashville ZHVI $463,131", "-0.7% YoY", "Active listings 10,596", "Price cuts 35.8%"], "themes": ["active listings", "price cuts", "contract volume", "mortgage rates", "davidson county", "buyer market", "housing market", "leading indicators"], "indicators": ["active listings", "contract volume", "mortgage rates", "demand", "months supply", "median sales price"]}, "watch": [{"name": "Median home value YoY", "detail": "Negative year-over-year \u2014 the line Ethan treats as confirmation.", "current": "-0.72%", "state": "triggered", "weight": 24}, {"name": "Price cuts as % of listings", "detail": "Above 35% is the threshold Ethan calls a buyer's market.", "current": "35.8% (-1.7% YoY)", "state": "triggered", "weight": 12}, {"name": "30yr mortgage rate", "detail": "Above 6.5% is the affordability ceiling Ethan keeps returning to.", "current": "6.71% (+3.5% 90d)", "state": "armed", "weight": 42}, {"name": "Active listings", "detail": "Inventory growth contained.", "current": "10,596 (+9.0% YoY)", "state": "watching", "weight": 233}, {"name": "Unemployment", "detail": "Labour market still supporting demand.", "current": "4.1%", "state": "clear", "weight": 0}], "hoods": [{"zip": "37122", "name": "Mount Juliet", "zhvi": 575414.8142579532, "yoy": 0.08929065229861018, "dom": 46.0, "active": 399.0, "active_yoy": 29.13}, {"zip": "37174", "name": "Spring Hill", "zhvi": 519202.9908973048, "yoy": -0.14898972291423482, "dom": 46.0, "active": 365.0, "active_yoy": 6.41}, {"zip": "37129", "name": "Murfreesboro W", "zhvi": 448478.84640491725, "yoy": 0.12858225196244452, "dom": 48.0, "active": 286.0, "active_yoy": 5.54}, {"zip": "37087", "name": "Lebanon", "zhvi": 446196.86066861794, "yoy": 1.0513768085709978, "dom": 51.0, "active": 348.0, "active_yoy": 10.83}, {"zip": "37128", "name": "Murfreesboro S", "zhvi": 445731.4038354689, "yoy": -0.60108392575598, "dom": 56.0, "active": 360.0, "active_yoy": 9.09}, {"zip": "37066", "name": "Gallatin", "zhvi": 443525.77831240493, "yoy": 0.5780328751421169, "dom": 56.0, "active": 485.0, "active_yoy": 13.850000000000001}, {"zip": "37135", "name": "Nolensville", "zhvi": 817999.3818172092, "yoy": 2.482079825052674, "dom": 56.0, "active": 169.0, "active_yoy": -1.17}, {"zip": "37075", "name": "Hendersonville", "zhvi": 517672.1982980245, "yoy": 0.47502339875912175, "dom": 59.0, "active": 377.0, "active_yoy": 25.25}, {"zip": "37130", "name": "Murfreesboro N", "zhvi": 374323.40784106025, "yoy": -0.3946062589177869, "dom": 59.0, "active": 158.0, "active_yoy": -11.24}, {"zip": "37067", "name": "Franklin East", "zhvi": 948212.6699407221, "yoy": 2.0645301245763794, "dom": 59.0, "active": 116.0, "active_yoy": 17.169999999999998}, {"zip": "37064", "name": "Franklin West", "zhvi": 901613.8017567806, "yoy": 1.457028776496134, "dom": 60.0, "active": 486.0, "active_yoy": 22.73}, {"zip": "37069", "name": "College Grove", "zhvi": 1016758.6219338499, "yoy": 2.2600819740575955, "dom": 60.0, "active": 112.0, "active_yoy": 23.080000000000002}, {"zip": "37148", "name": "Portland", "zhvi": 333656.330506056, "yoy": 0.5594177000518131, "dom": 61.0, "active": 131.0, "active_yoy": -2.96}, {"zip": "37221", "name": "Bellevue", "zhvi": 504293.36283664097, "yoy": -2.3651734395370165, "dom": 64.0, "active": 235.0, "active_yoy": 9.3}, {"zip": "37211", "name": "Antioch/Oak Hill", "zhvi": 396970.9231555136, "yoy": -3.2485736101001708, "dom": 66.0, "active": 329.0, "active_yoy": 0.61}, {"zip": "37027", "name": "Brentwood", "zhvi": 1231545.8314349002, "yoy": 2.203759490325198, "dom": 67.0, "active": 375.0, "active_yoy": 6.23}, {"zip": "37207", "name": "Inglewood", "zhvi": 374535.758246209, "yoy": -4.192976350421052, "dom": 67.0, "active": 317.0, "active_yoy": 7.82}, {"zip": "37209", "name": "The Nations", "zhvi": 551422.9184612016, "yoy": -1.7983217921467904, "dom": 71.0, "active": 384.0, "active_yoy": 6.959999999999999}, {"zip": "37215", "name": "Green Hills", "zhvi": 1201583.3153777504, "yoy": 1.5194517973915698, "dom": 73.0, "active": 216.0, "active_yoy": 14.89}, {"zip": "37206", "name": "East Nashville", "zhvi": 620798.8935236675, "yoy": -0.988381225972584, "dom": 74.0, "active": 192.0, "active_yoy": 9.09}, {"zip": "37208", "name": "Germantown", "zhvi": 457656.370738447, "yoy": -3.6122658268453907, "dom": 74.0, "active": 239.0, "active_yoy": 10.14}, {"zip": "37205", "name": "Belle Meade", "zhvi": 1085560.040624206, "yoy": 3.350339277514131, "dom": 80.0, "active": 195.0, "active_yoy": 8.33}, {"zip": "37204", "name": "12South/Melrose", "zhvi": 998545.5702268911, "yoy": 0.376527970965832, "dom": 81.0, "active": 141.0, "active_yoy": 6.02}, {"zip": "37203", "name": "Gulch/SoBro", "zhvi": 616512.9958659812, "yoy": -3.549705694721222, "dom": 82.0, "active": 354.0, "active_yoy": 41.04}, {"zip": "37201", "name": "Downtown", "zhvi": 497386.6174476189, "yoy": -0.6890328236141595, "dom": 93.0, "active": 40.0, "active_yoy": -28.57}], "metrics": {"rate": 6.71, "rate_90d": 3.5493827160493754, "rate_series": [6.2, 6.09, 6.08, 6.12, 6.32, 6.44, 6.54, 6.72, 6.79, 6.78, 6.84, 6.81, 6.69, 6.6, 6.72, 6.85, 6.91, 6.93, 7.04, 6.96, 6.95, 6.89, 6.87, 6.85, 6.76, 6.63, 6.65, 6.67, 6.65, 6.64, 6.62, 6.83, 6.81, 6.76, 6.76, 6.81, 6.86, 6.89, 6.85, 6.84, 6.81, 6.77, 6.67, 6.72, 6.75, 6.74, 6.72, 6.63, 6.58, 6.58, 6.56, 6.5, 6.35, 6.26, 6.3, 6.34, 6.3, 6.27, 6.19, 6.17, 6.22, 6.24, 6.26, 6.23, 6.19, 6.22, 6.21, 6.18, 6.15, 6.16, 6.06, 6.09, 6.1, 6.11, 6.09, 6.01, 5.98, 6.0, 6.11, 6.22, 6.38, 6.46, 6.37, 6.3, 6.23, 6.3, 6.37, 6.36, 6.51, 6.53, 6.48, 6.52, 6.47, 6.49, 6.43, 6.49, 6.55, 6.58, 6.66, 6.69, 6.67, 6.65, 6.66, 6.71], "unemployment": 4.1, "zhvi": 463131.051752006, "zhvi_yoy": -0.7208270406724739, "inventory": 10596.0, "inventory_yoy": 8.967503085150144, "price_cuts": 35.82228859436252, "price_cuts_yoy": -1.696975485237737}}, "totals": {"crypto_videos": 1013, "re_videos": 168}}</script>
+<script>
+const D = JSON.parse(document.getElementById('payload').textContent);
+
+const money = (n, d = 0) => n == null ? '--'
+  : '$' + Number(n).toLocaleString('en-US', {minimumFractionDigits: d, maximumFractionDigits: d});
+const price = n => n == null ? '--'
+  : n >= 1000 ? money(n) : n >= 1 ? '$' + n.toFixed(2)
+  : n >= 0.01 ? '$' + n.toFixed(4) : '$' + n.toFixed(8);
+const signed = n => n == null ? '--' : (n >= 0 ? '+' : '') + n.toFixed(2) + '%';
+const cls = n => n == null ? 'nt' : n > 0 ? 'up' : n < 0 ? 'dn' : 'nt';
+const esc = s => String(s ?? '').replace(/[&<>"]/g, c =>
+  ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]));
+
+const BIAS_COLOR = {bullish: 'var(--good)', bearish: 'var(--hot)',
+                    neutral: 'var(--cool)', uncertain: 'var(--warm)', mixed: 'var(--warm)'};
+
+function verdictHTML(c, videos) {
+  const top = c.primary;
+  if (!top) return '';
+  const bias = (c.bias || []).map(b =>
+    `<i style="width:${b.share}%;background:${BIAS_COLOR[b.name] || 'var(--cool)'}"></i>`).join('');
+  const key = (c.bias || []).map(b =>
+    `<span class="bk"><i style="background:${BIAS_COLOR[b.name] || 'var(--cool)'}"></i>${esc(b.name)} ${b.share}%</span>`).join('');
+  return `
+  <section class="verdict">
+    <div class="verdict-top">
+      <div class="verdict-main">
+        <span class="regime">${esc(c.regime_label)}</span>
+        <h1 class="phase">${esc(top.label)}</h1>
+        <p class="phase-blurb">${esc(top.blurb)}</p>
+        <div class="evidence">${(c.evidence || []).map(e => `<span class="eq">${esc(e)}</span>`).join('')}</div>
+      </div>
+      <div class="verdict-side">
+        <div>
+          <div class="side-h">Read consistency</div>
+          <div class="conf"><b>${c.confidence}%</b><span>of comparable videos called it ${esc(top.label.toLowerCase())}</span></div>
+          <div class="pdist">${(c.phases || []).map(p => `
+            <div class="prow">
+              <span class="pname" title="${esc(p.label)}">${esc(p.label)}</span>
+              <span class="ptrack"><span class="pfill" style="width:${p.share}%"></span></span>
+              <span class="ppct">${p.share}%</span>
+            </div>`).join('')}</div>
+        </div>
+        <div>
+          <div class="side-h">Stance in these conditions</div>
+          <div class="bias">${bias}</div>
+          <div class="bias-key">${key}</div>
+        </div>
+        <p class="basis">Based on <b>${c.sample_size}</b> of ${videos} analysed videos published while
+        ${esc(c.regime_blurb || 'conditions matched')}.</p>
+      </div>
+    </div>
+  </section>`;
+}
+
+function watchHTML(items) {
+  return `<div class="eyebrow">What to watch</div>
+  <div class="watch">${items.map(w => `
+    <article class="w" data-state="${esc(w.state)}">
+      <div class="w-top">
+        <span class="w-name">${esc(w.name)}</span>
+        <span class="w-state">${esc(w.state)}</span>
+      </div>
+      <div class="w-val">${esc(w.current)}</div>
+      <p class="w-detail">${esc(w.detail)}</p>
+      ${w.weight ? `<div class="w-freq">cited in ${w.weight} videos</div>` : ''}
+    </article>`).join('')}</div>`;
+}
+
+function coinsHTML(coins, total) {
+  if (!coins.length) return '';
+  const max = Math.max(...coins.map(c => c.videos), 1);
+  return `<div class="card">
+    <div class="card-h">Coverage by coin <em>share of ${total} videos mentioning each</em></div>
+    <div class="scroll"><table>
+      <thead><tr><th>Coin</th><th class="r">Price</th><th class="r">24h</th>
+        <th class="r">Market cap</th><th class="r">Mentioned in</th></tr></thead>
+      <tbody>${coins.map(c => `<tr>
+        <td><div class="sym">${esc(c.sym)}</div><div class="sub">${esc(c.name)}</div></td>
+        <td class="r num">${price(c.price)}</td>
+        <td class="r num ${cls(c.c24)}">${signed(c.c24)}</td>
+        <td class="r num">${c.mc >= 1 ? c.mc.toFixed(1) + 'B' : '--'}</td>
+        <td class="r"><span class="freqbar" style="width:${Math.max(3, c.videos / max * 54)}px;
+          opacity:${c.videos ? .85 : .15}"></span><span class="sub">${c.videos
+          ? c.videos + ' (' + c.vpct + '%)' : 'not covered'}</span></td>
+      </tr>`).join('')}</tbody>
+    </table></div></div>`;
+}
+
+function hoodsHTML(hoods) {
+  if (!hoods.length) return '';
+  return `<div class="card">
+    <div class="card-h">Neighbourhoods <em>fastest to slowest by days on market</em></div>
+    <div class="scroll"><table>
+      <thead><tr><th>Area</th><th class="r">Days on market</th><th class="r">Active</th>
+        <th class="r">Active YoY</th><th class="r">Home value</th><th class="r">YoY</th></tr></thead>
+      <tbody>${hoods.map(h => `<tr>
+        <td><div class="sym">${esc(h.name)}</div><div class="sub">${esc(h.zip)}</div></td>
+        <td class="r num">${h.dom != null ? h.dom.toFixed(0) + 'd' : '--'}</td>
+        <td class="r num">${h.active != null ? h.active.toLocaleString('en-US') : '--'}</td>
+        <td class="r num ${cls(h.active_yoy)}">${signed(h.active_yoy)}</td>
+        <td class="r num">${h.zhvi != null ? money(Math.round(h.zhvi / 1000)) + 'K' : '--'}</td>
+        <td class="r num ${cls(h.yoy)}">${signed(h.yoy)}</td>
+      </tr>`).join('')}</tbody>
+    </table></div></div>`;
+}
+
+function themesHTML(c) {
+  if (!c.themes || !c.themes.length) return '';
+  return `<div class="card">
+    <div class="card-h">Language of this regime <em>recurring phrasing in comparable videos</em></div>
+    <div style="padding:15px 17px">${c.themes.map(t => `<span class="chip">${esc(t)}</span>`).join('')}</div>
+  </div>`;
+}
+
+function render(tab) {
+  const d = D[tab];
+  const videos = tab === 'crypto' ? D.totals.crypto_videos : D.totals.re_videos;
+  document.body.classList.toggle('re', tab === 're');
+  document.getElementById('root').innerHTML = `<div class="page">
+    ${verdictHTML(d.cycle, videos)}
+    ${watchHTML(d.watch)}
+    ${tab === 'crypto' ? coinsHTML(d.coins, videos) : hoodsHTML(d.hoods)}
+    ${themesHTML(d.cycle)}
+    <p class="foot">
+      Cycle position is inferred by matching today's market conditions to the regime in force when each
+      of these videos was published, then reading back the phase the creator called at the time.
+      Market data refreshes daily; the video analysis is a fixed corpus of
+      ${D.totals.crypto_videos + D.totals.re_videos} videos and is not re-parsed.<br>
+      Generated <code>${esc(D.generated_at.slice(0, 16).replace('T', ' '))} UTC</code> ·
+      profile built <code>${esc((D.profile_built_at || '').slice(0, 10))}</code>
+    </p>
+  </div>`;
+}
+
+document.querySelectorAll('.tab').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab').forEach(b =>
+      b.setAttribute('aria-selected', String(b === btn)));
+    render(btn.dataset.tab);
+  });
+});
+render('crypto');
+</script>
+</body>
+</html>
